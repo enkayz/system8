@@ -1,69 +1,160 @@
-# Whose Prompt is it Anyways?
-A fun multiplayer game built on Convex using Dall-E.
+<div align="center">
 
-# What is Convex?
+<img src="assets/brand/system8-repo-banner.svg" alt="System 8 — Integration, automation and control" width="100%" />
 
-[Convex](https://convex.dev) is a hosted backend platform with a
-built-in database that lets you write your
-[database schema](https://docs.convex.dev/database/schemas) and
-[server functions](https://docs.convex.dev/functions) in
-[TypeScript](https://docs.convex.dev/typescript). Server-side database
-[queries](https://docs.convex.dev/functions/query-functions) automatically
-[cache](https://docs.convex.dev/functions/query-functions#caching--reactivity) and
-[subscribe](https://docs.convex.dev/client/react#reactivity) to data, powering a
-[realtime `useQuery` hook](https://docs.convex.dev/client/react#fetching-data) in our
-[React client](https://docs.convex.dev/client/react). There are also
-[Python](https://docs.convex.dev/client/python),
-[Rust](https://docs.convex.dev/client/rust),
-[ReactNative](https://docs.convex.dev/client/react-native), and
-[Node](https://docs.convex.dev/client/javascript) clients, as well as a straightforward
-[HTTP API](https://github.com/get-convex/convex-js/blob/main/src/browser/http_client.ts#L40).
+<br />
 
-The database support
-[NoSQL-style documents](https://docs.convex.dev/database/document-storage) with
-[relationships](https://docs.convex.dev/database/document-ids) and
-[custom indexes](https://docs.convex.dev/database/indexes/)
-(including on fields in nested objects).
+[![PowerShell 5.1+](https://img.shields.io/badge/PowerShell-5.1%20%7C%207-32f5c8?style=flat-square&logo=powershell&logoColor=050608)](tools/s8)
+[![Platform](https://img.shields.io/badge/platform-Windows-32f5c8?style=flat-square&logo=windows&logoColor=050608)](#system-8-package-manager)
+[![License](https://img.shields.io/badge/license-MIT-536579?style=flat-square)](LICENSE)
+[![Status](https://img.shields.io/badge/status-active-32f5c8?style=flat-square)](#current-surface)
 
-The
-[`query`](https://docs.convex.dev/functions/query-functions) and
-[`mutation`](https://docs.convex.dev/functions/mutation-functions) server functions have transactional,
-low latency access to the database and leverage our
-[`v8` runtime](https://docs.convex.dev/functions/runtimes) with
-[determinism guardrails](https://docs.convex.dev/functions/runtimes#using-randomness-and-time-in-queries-and-mutations)
-to provide the strongest ACID guarantees on the market:
-immediate consistency,
-serializable isolation, and
-automatic conflict resolution via
-[optimistic multi-version concurrency control](https://docs.convex.dev/database/advanced/occ) (OCC / MVCC).
+**Make incompatible systems behave like one system.**
 
-The [`action` server functions](https://docs.convex.dev/functions/actions) have
-access to external APIs and enable other side-effects and non-determinism in
-either our
-[optimized `v8` runtime](https://docs.convex.dev/functions/runtimes) or a more
-[flexible `node` runtime](https://docs.convex.dev/functions/runtimes#nodejs-runtime).
+[Install](#one-line-install) · [Capabilities](#integration-surface) · [Tools](#current-surface) · [Architecture](docs/INTEGRATION-MODEL.md) · [Contributing](CONTRIBUTING.md)
 
-Functions can run in the background via
-[scheduling](https://docs.convex.dev/scheduling/scheduled-functions) and
-[cron jobs](https://docs.convex.dev/scheduling/cron-jobs).
+</div>
 
-Development is cloud-first, with
-[hot reloads for server function](https://docs.convex.dev/cli#run-the-convex-dev-server) editing via the
-[CLI](https://docs.convex.dev/cli). There is a
-[dashbord UI](https://docs.convex.dev/dashboard) to
-[browse and edit data](https://docs.convex.dev/dashboard/deployments/data),
-[edit environment variables](https://docs.convex.dev/production/environment-variables),
-[view logs](https://docs.convex.dev/dashboard/deployments/logs),
-[run server functions](https://docs.convex.dev/dashboard/deployments/functions), and more.
+---
 
-There are built-in features for
-[reactive pagination](https://docs.convex.dev/database/pagination),
-[file storage](https://docs.convex.dev/file-storage),
-[reactive search](https://docs.convex.dev/text-search),
-[https endpoints](https://docs.convex.dev/functions/http-actions) (for webhooks),
-[streaming import/export](https://docs.convex.dev/database/import-export/), and
-[runtime data validation](https://docs.convex.dev/database/schemas#validators) for
-[function arguments](https://docs.convex.dev/functions/args-validation) and
-[database data](https://docs.convex.dev/database/schemas#schema-validation).
+## System 8
 
-Everything scales automatically, and it’s [free to start](https://www.convex.dev/plans).
+System 8 is an integration and automation practice focused on the joins between systems: identity, Microsoft 365, endpoints, infrastructure, applications, agents, data and the humans operating them.
+
+The work is not limited to a vendor stack or interface. The operating problem is treated as one system, then reduced to explicit contracts, observable state and recoverable execution.
+
+```text
+people  →  interfaces  →  applications  →  automation  →  platforms  →  infrastructure
+  L0           L8              L7               L6             L5–3             L2–1
+```
+
+**Layer 0 is human context.** A technically correct system that people cannot operate, trust or recover is incomplete.
+
+## Integration surface
+
+| Domain | Typical work |
+|---|---|
+| **Microsoft 365** | SharePoint, Teams, Purview, Entra ID, Power Platform, Graph, licensing and governance |
+| **Identity and access** | Authentication, authorization, lifecycle, conditional access and cross-system identity mapping |
+| **Infrastructure** | Windows, networking, TLS, DNS, endpoints, policy, deployment and operational diagnostics |
+| **Automation** | PowerShell, APIs, browser automation, scheduled workflows, agents and event-driven orchestration |
+| **Data and middleware** | Schema translation, adapters, migration, synchronization, audit trails and compatibility layers |
+| **Interfaces** | Web, desktop, mobile, voice, DTMF, kiosk, dashboard and operator tooling |
+| **Operational control** | Validation, dry runs, snapshots, rollback, observability and deterministic recovery |
+
+## System 8 Package Manager
+
+The repository includes a PowerShell 5.1/7-compatible package manager for System 8 tools.
+
+### One-line install
+
+```powershell
+irm https://raw.githubusercontent.com/enkayz/system8/main/tools/s8/install.ps1 | iex
+```
+
+The bootstrap self-elevates, installs `s8`, adds it to the machine `PATH`, and installs the ADMX Manager by default.
+
+```powershell
+s8 list
+s8 search admx
+s8 install admx
+s8 update admx
+s8 doctor
+s8 rollback admx
+s8 remove admx
+```
+
+Install the package manager without installing ADMX Manager:
+
+```powershell
+& ([scriptblock]::Create((irm https://raw.githubusercontent.com/enkayz/system8/main/tools/s8/install.ps1))) -NoAdmx
+```
+
+## Current surface
+
+### `s8` package manager
+
+A common bootstrap and lifecycle layer for System 8 utilities.
+
+- PowerShell 5.1 and 7 runtime support
+- UAC self-elevation
+- machine-level command registration
+- stable, preview and nightly channel model
+- package installation state
+- update, diagnostics, removal and rollback
+
+Source: [`tools/s8`](tools/s8)
+
+### ADMX Repository Manager
+
+Windows-native administrative-template repository manager designed for local `PolicyDefinitions` stores and Active Directory Central Stores.
+
+- package import and staging
+- ADMX/ADML XML validation
+- SHA-256 inventory
+- deployment dry runs
+- pre-deployment snapshots
+- transactional store replacement
+- rollback and failure recovery
+
+Source: [`tools/admx-manager`](tools/admx-manager)
+
+## Operating model
+
+System 8 integrations are built around five invariants:
+
+1. **Contract first** — every boundary has an explicit input, output, ownership and failure mode.
+2. **Observable state** — operators can determine what happened without reverse-engineering the implementation.
+3. **Reversible change** — deployment includes validation, snapshot and rollback paths.
+4. **Minimum coupling** — adapters isolate vendor and platform assumptions.
+5. **Layer 0 included** — workflows are designed around the actual operator, not an imaginary perfect user.
+
+The full model is documented in [`docs/INTEGRATION-MODEL.md`](docs/INTEGRATION-MODEL.md).
+
+## Repository map
+
+```text
+.
+├── assets/brand/          System 8 visual assets
+├── docs/                  architecture and operating model
+├── tools/
+│   ├── s8/                System 8 package manager
+│   └── admx-manager/      ADMX repository and rollback tooling
+├── src/                   existing application source
+├── convex/                existing Convex backend source
+└── public/                static application assets
+```
+
+## Engineering standard
+
+A System 8 tool should provide, where applicable:
+
+- unattended and interactive execution paths
+- PowerShell 5.1 and 7 compatibility for Windows administration tooling
+- idempotent operations
+- structured logs
+- explicit exit conditions
+- preflight diagnostics
+- dry-run support
+- checksums or signatures for downloaded artifacts
+- transaction boundaries
+- rollback or compensating actions
+- documentation that reflects the actual implementation
+
+## Security
+
+Do not report vulnerabilities through public issues. See [`SECURITY.md`](SECURITY.md).
+
+## Contributing
+
+Small, independently verifiable changes are preferred. See [`CONTRIBUTING.md`](CONTRIBUTING.md).
+
+---
+
+<div align="center">
+
+**Carry the zero.**
+
+`System 8 · Perth, Western Australia`
+
+</div>
