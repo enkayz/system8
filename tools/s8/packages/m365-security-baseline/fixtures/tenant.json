@@ -1,0 +1,6 @@
+{
+  "conditionalAccessPolicies":[{"id":"ca1","displayName":"Require MFA","state":"enabled","grantControls":{"builtInControls":["mfa"]}}],
+  "directoryRoles":[{"id":"r1","displayName":"Global Administrator","members":[{"displayName":"Admin One","userPrincipalName":"admin1@example.com"},{"displayName":"Admin Two","userPrincipalName":"admin2@example.com"}]}],
+  "servicePrincipals":[{"id":"sp1","displayName":"Unverified App","verifiedPublisher":{},"passwordCredentials":[]}],
+  "authorizationPolicy":[{"id":"authorizationPolicy","allowInvitesFrom":"adminsAndGuestInviters"}]
+}
