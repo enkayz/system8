@@ -6,6 +6,7 @@
 
 [![PowerShell 5.1+](https://img.shields.io/badge/PowerShell-5.1%20%7C%207-32f5c8?style=flat-square&logo=powershell&logoColor=050608)](tools/s8)
 [![Platform](https://img.shields.io/badge/platform-Windows-32f5c8?style=flat-square&logo=windows&logoColor=050608)](#system-8-package-manager)
+[![Microsoft 365](https://img.shields.io/badge/Microsoft%20365-assessment-32f5c8?style=flat-square&logo=microsoft365&logoColor=050608)](#microsoft-365-toolkit)
 [![License](https://img.shields.io/badge/license-MIT-536579?style=flat-square)](LICENSE)
 [![Status](https://img.shields.io/badge/status-active-32f5c8?style=flat-square)](#current-surface)
 
@@ -56,12 +57,12 @@ The bootstrap self-elevates, installs `s8`, adds it to the machine `PATH`, and i
 
 ```powershell
 s8 list
-s8 search admx
-s8 install admx
-s8 update admx
+s8 search m365
+s8 install m365
+s8 update m365
 s8 doctor
-s8 rollback admx
-s8 remove admx
+s8 rollback m365
+s8 remove m365
 ```
 
 Install the package manager without installing ADMX Manager:
@@ -84,6 +85,30 @@ A common bootstrap and lifecycle layer for System 8 utilities.
 - update, diagnostics, removal and rollback
 
 Source: [`tools/s8`](tools/s8)
+
+### Microsoft 365 Toolkit
+
+Read-only tenant assessment utilities built around Microsoft Graph and explicit evidence output.
+
+```powershell
+s8 install m365
+s8m365 inventory -InstallDependencies
+s8m365 licenses
+s8m365 labels
+s8m365 sharing
+s8m365 full
+```
+
+- tenant, user, group and directory-role inventory
+- licence capacity, consumption and utilization analysis
+- enabled unlicensed account detection
+- disabled accounts retaining licence assignments
+- sensitivity-label and policy-readiness evidence
+- SharePoint site, guest identity and external-domain assessment
+- JSON, CSV and styled HTML output
+- partial-collection error reporting without invented results
+
+Source: [`tools/s8/packages/m365`](tools/s8/packages/m365)
 
 ### ADMX Repository Manager
 
@@ -118,7 +143,10 @@ The full model is documented in [`docs/INTEGRATION-MODEL.md`](docs/INTEGRATION-M
 ├── assets/brand/          System 8 visual assets
 ├── docs/                  architecture and operating model
 ├── tools/
-│   ├── s8/                System 8 package manager
+│   ├── s8/                System 8 package manager and package catalog
+│   │   └── packages/
+│   │       ├── admx/      ADMX package lifecycle
+│   │       └── m365/      Microsoft 365 assessment toolkit
 │   └── admx-manager/      ADMX repository and rollback tooling
 ├── src/                   existing application source
 ├── convex/                existing Convex backend source
