@@ -125,6 +125,9 @@ The stable catalogue also contains focused tools for recurring discovery, assura
 | `m365-entitlement-advisor` | `s8entitlement` | Live service-plan entitlement compared with explicit persona and capability requirements |
 | `m365-change-impact` | `s8changes` | Service health and Message Center changes prioritized against tenant scale |
 | `m365-copilot-readiness` | `s8copilot` | Copilot licence, site lifecycle, collaboration-risk and pilot-gate evidence |
+| `m365-access-explainer` | `s8access` | User access paths through nested membership, applications, ownership and licensing |
+| `m365-leaver-readiness` | `s8leaver` | Ownership, reporting-line, membership and OneDrive dependencies before offboarding |
+| `m365-recovery-readiness` | `s8resilience` | Emergency access, privileged redundancy, domain and application credential recovery posture |
 
 ```powershell
 s8 install m365-license-optimizer
@@ -135,6 +138,9 @@ s8 install m365-migration-estimator
 s8 install m365-entitlement-advisor
 s8 install m365-change-impact
 s8 install m365-copilot-readiness
+s8 install m365-access-explainer
+s8 install m365-leaver-readiness
+s8 install m365-recovery-readiness
 
 s8license full -InstallDependencies
 s8tenantdiff capture -InstallDependencies -OutputPath .\tenant-baseline
@@ -144,6 +150,9 @@ s8migrate template -OutputPath .\migration-estimate
 s8entitlement template -OutputPath .\entitlement
 s8changes full -InstallDependencies
 s8copilot full -InstallDependencies
+s8access explain -UserPrincipalName user@contoso.com -InstallDependencies
+s8leaver assess -UserPrincipalName leaver@contoso.com -InstallDependencies
+s8resilience full -InstallDependencies
 ```
 
 Graph-connected packages request delegated read scopes and preserve partial collection failures in `collection-evidence.csv` and JSON. The migration estimator is offline. The focused operator packages produce CSV, JSON and styled HTML, and none performs remediation.
