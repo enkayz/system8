@@ -66,6 +66,30 @@
       "url": "https://codeload.github.com/enkayz/system8/zip/refs/heads/main",
       "sha256": "development",
       "installScript": "system8-main/tools/s8/packages/m365-migration-estimator/install.ps1"
+    },
+    {
+      "name": "m365-entitlement-advisor",
+      "version": "1.0.0",
+      "description": "Compare operator-defined capabilities with live Microsoft 365 service-plan entitlements.",
+      "url": "https://codeload.github.com/enkayz/system8/zip/refs/heads/main",
+      "sha256": "development",
+      "installScript": "system8-main/tools/s8/packages/m365-entitlement-advisor/install.ps1"
+    },
+    {
+      "name": "m365-change-impact",
+      "version": "1.0.0",
+      "description": "Prioritize Microsoft 365 service health and Message Center changes using live tenant scale evidence.",
+      "url": "https://codeload.github.com/enkayz/system8/zip/refs/heads/main",
+      "sha256": "development",
+      "installScript": "system8-main/tools/s8/packages/m365-change-impact/install.ps1"
+    },
+    {
+      "name": "m365-copilot-readiness",
+      "version": "1.0.0",
+      "description": "Read-only Microsoft 365 Copilot licensing, content lifecycle and pilot-readiness assessment.",
+      "url": "https://codeload.github.com/enkayz/system8/zip/refs/heads/main",
+      "sha256": "development",
+      "installScript": "system8-main/tools/s8/packages/m365-copilot-readiness/install.ps1"
     }
   ]
 }
