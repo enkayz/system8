@@ -32,3 +32,5 @@ jobs:
           git add -A
           git commit -m "Complete M365 package verification wave"
           git push
+
+# Triggered after payload staging.
