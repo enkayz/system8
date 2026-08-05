@@ -110,6 +110,35 @@ s8m365 full
 
 Source: [`tools/s8/packages/m365`](tools/s8/packages/m365)
 
+### Microsoft 365 operator packages
+
+The stable catalogue also contains focused tools for recurring discovery, assurance and planning work:
+
+| Package | Installed command | Operator output |
+|---|---|---|
+| `m365-governance` | `s8gov` | Entra, consent, Conditional Access, stale identity, Teams and SharePoint governance evidence |
+| `m365-license-optimizer` | `s8license` | SKU utilization, dormant or disabled licensed users and customer-priced savings candidates |
+| `m365-tenant-diff` | `s8tenantdiff` | Normalized point-in-time snapshots and offline added/removed/changed configuration reports |
+| `m365-sharepoint-modernizer` | `s8spmodern` | Site and library inventory, stale/scale flags and an advisory modernization plan |
+| `m365-security-baseline` | `s8secure` | Conditional Access, privileged-role and enterprise-application baseline findings |
+| `m365-migration-estimator` | `s8migrate` | Offline migration effort, elapsed-time, risk and optionally customer-priced cost estimates |
+
+```powershell
+s8 install m365-license-optimizer
+s8 install m365-tenant-diff
+s8 install m365-sharepoint-modernizer
+s8 install m365-security-baseline
+s8 install m365-migration-estimator
+
+s8license full -InstallDependencies
+s8tenantdiff capture -InstallDependencies -OutputPath .\tenant-baseline
+s8spmodern full -InstallDependencies
+s8secure full -InstallDependencies
+s8migrate template -OutputPath .\migration-estimate
+```
+
+Graph-connected packages request delegated read scopes and preserve partial collection failures in `collection-evidence.csv` and JSON. The migration estimator is offline. All five produce CSV, JSON and styled HTML, and none performs remediation.
+
 ### ADMX Repository Manager
 
 Windows-native administrative-template repository manager designed for local `PolicyDefinitions` stores and Active Directory Central Stores.
@@ -146,7 +175,9 @@ The full model is documented in [`docs/INTEGRATION-MODEL.md`](docs/INTEGRATION-M
 │   ├── s8/                System 8 package manager and package catalog
 │   │   └── packages/
 │   │       ├── admx/      ADMX package lifecycle
-│   │       └── m365/      Microsoft 365 assessment toolkit
+│   │       ├── m365/      Microsoft 365 assessment toolkit
+│   │       ├── _shared/   shared Graph authentication, evidence and reporting utilities
+│   │       └── m365-*/    focused governance, security, optimization and planning packages
 │   └── admx-manager/      ADMX repository and rollback tooling
 ├── src/                   existing application source
 ├── convex/                existing Convex backend source
