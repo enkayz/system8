@@ -122,6 +122,9 @@ The stable catalogue also contains focused tools for recurring discovery, assura
 | `m365-sharepoint-modernizer` | `s8spmodern` | Site and library inventory, stale/scale flags and an advisory modernization plan |
 | `m365-security-baseline` | `s8secure` | Conditional Access, privileged-role and enterprise-application baseline findings |
 | `m365-migration-estimator` | `s8migrate` | Offline migration effort, elapsed-time, risk and optionally customer-priced cost estimates |
+| `m365-entitlement-advisor` | `s8entitlement` | Live service-plan entitlement compared with explicit persona and capability requirements |
+| `m365-change-impact` | `s8changes` | Service health and Message Center changes prioritized against tenant scale |
+| `m365-copilot-readiness` | `s8copilot` | Copilot licence, site lifecycle, collaboration-risk and pilot-gate evidence |
 
 ```powershell
 s8 install m365-license-optimizer
@@ -129,15 +132,23 @@ s8 install m365-tenant-diff
 s8 install m365-sharepoint-modernizer
 s8 install m365-security-baseline
 s8 install m365-migration-estimator
+s8 install m365-entitlement-advisor
+s8 install m365-change-impact
+s8 install m365-copilot-readiness
 
 s8license full -InstallDependencies
 s8tenantdiff capture -InstallDependencies -OutputPath .\tenant-baseline
 s8spmodern full -InstallDependencies
 s8secure full -InstallDependencies
 s8migrate template -OutputPath .\migration-estimate
+s8entitlement template -OutputPath .\entitlement
+s8changes full -InstallDependencies
+s8copilot full -InstallDependencies
 ```
 
-Graph-connected packages request delegated read scopes and preserve partial collection failures in `collection-evidence.csv` and JSON. The migration estimator is offline. All five produce CSV, JSON and styled HTML, and none performs remediation.
+Graph-connected packages request delegated read scopes and preserve partial collection failures in `collection-evidence.csv` and JSON. The migration estimator is offline. The focused operator packages produce CSV, JSON and styled HTML, and none performs remediation.
+
+The rationale for the newest operator workflows, including the market gaps they address and their external references, is documented in [`docs/M365-OPERATOR-GAPS.md`](docs/M365-OPERATOR-GAPS.md).
 
 ### ADMX Repository Manager
 
