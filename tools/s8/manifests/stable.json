@@ -1,0 +1,15 @@
+{
+  "schemaVersion": 1,
+  "channel": "stable",
+  "generated": "2026-08-06T00:00:00+08:00",
+  "packages": [
+    {
+      "name": "admx",
+      "version": "1.1.0",
+      "description": "System 8 ADMX repository manager with GUI, snapshots, validation and rollback.",
+      "url": "https://codeload.github.com/enkayz/system8/zip/refs/heads/main",
+      "sha256": "development",
+      "installScript": "system8-main/tools/s8/packages/admx/install.ps1"
+    }
+  ]
+}
