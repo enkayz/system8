@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "channel": "stable",
-  "generated": "2026-08-06T00:30:00+08:00",
+  "generated": "2026-08-06T01:00:00+08:00",
   "packages": [
     {
       "name": "admx",
@@ -18,6 +18,14 @@
       "url": "https://codeload.github.com/enkayz/system8/zip/refs/heads/main",
       "sha256": "development",
       "installScript": "system8-main/tools/s8/packages/m365/install.ps1"
+    },
+    {
+      "name": "m365-governance",
+      "version": "1.0.0",
+      "description": "Entra, app consent, Conditional Access, stale identity, Teams and SharePoint governance assessment suite.",
+      "url": "https://codeload.github.com/enkayz/system8/zip/refs/heads/main",
+      "sha256": "development",
+      "installScript": "system8-main/tools/s8/packages/m365-governance/install.ps1"
     }
   ]
 }
