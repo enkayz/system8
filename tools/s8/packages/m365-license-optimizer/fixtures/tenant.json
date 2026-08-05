@@ -1,0 +1,17 @@
+{
+  "subscribedSkus": [{"skuId":"sku-e3","skuPartNumber":"SPE_E3","prepaidUnits":{"enabled":10},"consumedUnits":8}],
+  "users": [
+    {"id":"u1","displayName":"Active User","userPrincipalName":"active@example.com","accountEnabled":true,"assignedLicenses":[{"skuId":"sku-e3"}],"signInActivity":{"lastSuccessfulSignInDateTime":"2026-08-01T00:00:00Z"}},
+    {"id":"u2","displayName":"Dormant User","userPrincipalName":"dormant@example.com","accountEnabled":true,"assignedLicenses":[{"skuId":"sku-e3"}],"signInActivity":{"lastSuccessfulSignInDateTime":"2025-01-01T00:00:00Z"}},
+    {"id":"u3","displayName":"Disabled User","userPrincipalName":"disabled@example.com","accountEnabled":false,"assignedLicenses":[{"skuId":"sku-e3"}],"signInActivity":{}}
+  ],
+  "organization":[{"id":"tenant-1","displayName":"Fixture Tenant"}],
+  "domains":[{"id":"example.com","isVerified":true}],
+  "conditionalAccessPolicies":[{"id":"ca1","displayName":"Require MFA","state":"enabled","grantControls":{"builtInControls":["mfa"]}}],
+  "servicePrincipals":[{"id":"sp1","displayName":"Unverified App","verifiedPublisher":{},"passwordCredentials":[]}],
+  "groups":[{"id":"g1","displayName":"Operations"}],
+  "directoryRoles":[{"id":"r1","displayName":"Global Administrator","members":[{"displayName":"Admin One","userPrincipalName":"admin1@example.com"},{"displayName":"Admin Two","userPrincipalName":"admin2@example.com"}]}],
+  "authorizationPolicy":[{"id":"authorizationPolicy","allowInvitesFrom":"adminsAndGuestInviters"}],
+  "sites":[{"id":"s1","displayName":"Legacy Intranet","webUrl":"https://example.sharepoint.com/sites/legacy","lastModifiedDateTime":"2024-01-01T00:00:00Z"},{"id":"s2","displayName":"Modern Team","webUrl":"https://example.sharepoint.com/sites/modern","lastModifiedDateTime":"2026-07-01T00:00:00Z"}],
+  "lists":[{"id":"l1","siteId":"s1","displayName":"Documents","template":"documentLibrary","itemCount":12000},{"id":"l2","siteId":"s2","displayName":"Shared Documents","template":"documentLibrary","itemCount":500}]
+}
