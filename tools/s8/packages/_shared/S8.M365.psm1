@@ -1,0 +1,78 @@
+Set-StrictMode -Version Latest
+$ErrorActionPreference = 'Stop'
+
+function Initialize-S8Runtime {
+  if ($PSVersionTable.PSVersion.Major -lt 5) { throw 'PowerShell 5.1 or 7+ required.' }
+  if ($PSVersionTable.PSVersion.Major -eq 5) { [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12 }
+  $ProgressPreference = 'SilentlyContinue'
+}
+
+function Connect-S8Graph {
+  param([string[]]$Scopes, [switch]$InstallDependencies)
+  if (-not (Get-Module -ListAvailable Microsoft.Graph.Authentication)) {
+    if (-not $InstallDependencies) { throw 'Missing Microsoft.Graph.Authentication. Re-run with -InstallDependencies.' }
+    Install-Module Microsoft.Graph.Authentication -Scope CurrentUser -Force -AllowClobber -Repository PSGallery
+  }
+  Import-Module Microsoft.Graph.Authentication -Force
+  $context = Get-MgContext -ErrorAction SilentlyContinue
+  if (-not $context) { Connect-MgGraph -Scopes $Scopes -NoWelcome | Out-Null }
+  $context = Get-MgContext
+  $missing = @($Scopes | Where-Object { $_ -notin @($context.Scopes) })
+  if ($missing.Count) { Connect-MgGraph -Scopes $Scopes -NoWelcome | Out-Null }
+  Get-MgContext
+}
+
+function Get-S8GraphCollection {
+  param([Parameter(Mandatory)][string]$Uri)
+  $items = @()
+  $next = $Uri
+  while ($next) {
+    $response = Invoke-MgGraphRequest -Method GET -Uri $next -OutputType PSObject
+    if ($null -ne $response.value) { $items += @($response.value) } else { $items += @($response) }
+    $next = $response.'@odata.nextLink'
+  }
+  @($items)
+}
+
+function Invoke-S8Collection {
+  param([Parameter(Mandatory)][string]$Name, [Parameter(Mandatory)][scriptblock]$Action, [Parameter(Mandatory)][System.Collections.IList]$Evidence)
+  $started = Get-Date
+  try {
+    $data = @(& $Action)
+    [void]$Evidence.Add([pscustomobject]@{ Collection=$Name; Status='Succeeded'; Records=$data.Count; Started=$started.ToString('o'); Completed=(Get-Date).ToString('o'); Error=$null })
+    @($data)
+  } catch {
+    [void]$Evidence.Add([pscustomobject]@{ Collection=$Name; Status='Failed'; Records=0; Started=$started.ToString('o'); Completed=(Get-Date).ToString('o'); Error=$_.Exception.Message })
+    @()
+  }
+}
+
+function Export-S8Data {
+  param([Parameter(Mandatory)][string]$OutputPath, [Parameter(Mandatory)][string]$Name, [AllowEmptyCollection()][object[]]$Data)
+  New-Item -ItemType Directory -Path $OutputPath -Force | Out-Null
+  @($Data) | ConvertTo-Json -Depth 30 | Set-Content (Join-Path $OutputPath "$Name.json") -Encoding UTF8
+  @($Data) | Export-Csv (Join-Path $OutputPath "$Name.csv") -NoTypeInformation -Encoding UTF8
+}
+
+function Write-S8Report {
+  param([Parameter(Mandatory)][string]$OutputPath, [Parameter(Mandatory)][string]$Title, [Parameter(Mandatory)][hashtable]$Sections, [string]$Mode='Read-only assessment')
+  $content = ''
+  foreach ($name in $Sections.Keys) {
+    $rows = @($Sections[$name])
+    $table = if ($rows.Count) { $rows | Select-Object -First 500 | ConvertTo-Html -Fragment } else { '<p>No records returned.</p>' }
+    $content += "<section><h2>$([System.Net.WebUtility]::HtmlEncode($name))</h2><p>$($rows.Count) records</p>$table</section>"
+  }
+  $html = @"
+<!doctype html><html><head><meta charset='utf-8'><title>$Title</title><style>body{background:#050608;color:#d8e4e2;font:14px Segoe UI,Arial;margin:32px}main{max-width:1500px;margin:auto}h1,h2{color:#32f5c8}section{border:1px solid #263737;background:#0a0e0f;padding:20px;margin:16px 0;overflow:auto}table{border-collapse:collapse;width:100%;font-size:12px}th,td{border-bottom:1px solid #263737;padding:7px;text-align:left;vertical-align:top}th{color:#32f5c8}</style></head><body><main><h1>$Title</h1><p>Generated: $(Get-Date -Format o) · Mode: $Mode</p>$content</main></body></html>
+"@
+  $html | Set-Content (Join-Path $OutputPath 'index.html') -Encoding UTF8
+}
+
+function Complete-S8Run {
+  param([string]$OutputPath, [string]$Tool, [string]$Command, [object]$Context, [System.Collections.IList]$Evidence)
+  Export-S8Data $OutputPath 'collection-evidence' @($Evidence)
+  $manifest = [pscustomobject]@{ SchemaVersion=1; Tool=$Tool; Command=$Command; Generated=(Get-Date).ToString('o'); TenantId=if($Context){$Context.TenantId}else{$null}; Account=if($Context){$Context.Account}else{$null}; Mode='read-only'; Evidence=@($Evidence) }
+  $manifest | ConvertTo-Json -Depth 20 | Set-Content (Join-Path $OutputPath 'manifest.json') -Encoding UTF8
+}
+
+Export-ModuleMember -Function Initialize-S8Runtime,Connect-S8Graph,Get-S8GraphCollection,Invoke-S8Collection,Export-S8Data,Write-S8Report,Complete-S8Run
