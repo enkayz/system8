@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="420" viewBox="0 0 1280 420" role="img" aria-labelledby="title desc">
+  <title id="title">System 8 — Integration without the theatre</title>
+  <desc id="desc">Dark technical banner with an S8 geometric mark and integration topology.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#050608"/><stop offset="0.55" stop-color="#0b1018"/><stop offset="1" stop-color="#101826"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="72%" cy="42%" r="62%"><stop offset="0" stop-color="#32f5c8" stop-opacity=".16"/><stop offset="1" stop-color="#32f5c8" stop-opacity="0"/></radialGradient>
+    <filter id="soft"><feGaussianBlur stdDeviation="10"/></filter>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#9fb3c8" stroke-opacity=".08"/></pattern>
+  </defs>
+  <rect width="1280" height="420" rx="24" fill="url(#bg)"/>
+  <rect width="1280" height="420" rx="24" fill="url(#grid)"/>
+  <rect width="1280" height="420" rx="24" fill="url(#glow)"/>
+  <g transform="translate(78 74)">
+    <g fill="none" stroke="#32f5c8" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M82 14C27 14 4 44 4 76c0 38 31 54 78 61 47 8 72 22 72 58 0 38-31 64-82 64-32 0-58-10-78-30"/>
+      <path d="M176 14c42 0 75 26 75 62 0 28-18 48-45 59 33 10 55 33 55 64 0 38-36 66-85 66s-85-28-85-66c0-31 22-54 55-64-27-11-45-31-45-59 0-36 33-62 75-62Z" opacity=".92"/>
+    </g>
+    <circle cx="176" cy="135" r="11" fill="#32f5c8"/>
+    <text x="320" y="84" fill="#f4f7fb" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="74" font-weight="750" letter-spacing="-2">SYSTEM 8</text>
+    <text x="324" y="132" fill="#9fb3c8" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="19" letter-spacing="4">INTEGRATION • AUTOMATION • CONTROL</text>
+    <text x="320" y="206" fill="#d9e4ef" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="32" font-weight="520">Make incompatible systems behave like one system.</text>
+    <text x="320" y="254" fill="#7f93a8" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="20">Microsoft 365 · identity · infrastructure · agents · data · interfaces</text>
+  </g>
+  <g transform="translate(1015 270)" fill="none" stroke="#32f5c8" stroke-width="2">
+    <circle r="16" fill="#32f5c8"/><circle cx="-80" r="12"/><circle cx="80" r="12"/><circle cy="-68" r="12"/><circle cy="68" r="12"/>
+    <path d="M-68 0h52M16 0h52M0-56v40M0 16v40"/>
+  </g>
+  <text x="80" y="382" fill="#536579" font-family="ui-monospace,SFMono-Regular,Consolas,monospace" font-size="15">CARRY THE ZERO · HUMAN CONTEXT IS LAYER 0</text>
+</svg>
