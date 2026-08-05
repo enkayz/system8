@@ -90,6 +90,30 @@
       "url": "https://codeload.github.com/enkayz/system8/zip/refs/heads/main",
       "sha256": "development",
       "installScript": "system8-main/tools/s8/packages/m365-copilot-readiness/install.ps1"
+    },
+    {
+      "name": "m365-access-explainer",
+      "version": "1.0.0",
+      "description": "Explain user access through transitive memberships, application roles, ownership and licence evidence.",
+      "url": "https://codeload.github.com/enkayz/system8/zip/refs/heads/main",
+      "sha256": "development",
+      "installScript": "system8-main/tools/s8/packages/m365-access-explainer/install.ps1"
+    },
+    {
+      "name": "m365-leaver-readiness",
+      "version": "1.0.0",
+      "description": "Read-only Microsoft 365 leaver dependency discovery and sequenced offboarding plan.",
+      "url": "https://codeload.github.com/enkayz/system8/zip/refs/heads/main",
+      "sha256": "development",
+      "installScript": "system8-main/tools/s8/packages/m365-leaver-readiness/install.ps1"
+    },
+    {
+      "name": "m365-recovery-readiness",
+      "version": "1.0.0",
+      "description": "Assess emergency access, privileged redundancy, domain and application credential recovery posture.",
+      "url": "https://codeload.github.com/enkayz/system8/zip/refs/heads/main",
+      "sha256": "development",
+      "installScript": "system8-main/tools/s8/packages/m365-recovery-readiness/install.ps1"
     }
   ]
 }
