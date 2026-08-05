@@ -1,0 +1,10 @@
+{
+  "sites":[
+    {"id":"s1","displayName":"Legacy Intranet","webUrl":"https://example.sharepoint.com/sites/legacy","lastModifiedDateTime":"2024-01-01T00:00:00Z"},
+    {"id":"s2","displayName":"Modern Team","webUrl":"https://example.sharepoint.com/sites/modern","lastModifiedDateTime":"2026-07-01T00:00:00Z"}
+  ],
+  "lists":[
+    {"id":"l1","siteId":"s1","displayName":"Documents","template":"documentLibrary","itemCount":12000},
+    {"id":"l2","siteId":"s2","displayName":"Shared Documents","template":"documentLibrary","itemCount":500}
+  ]
+}
