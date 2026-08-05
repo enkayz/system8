@@ -1,0 +1,21 @@
+name: M365 package verification
+on:
+  push:
+    paths:
+      - "tools/s8/packages/**"
+      - "tools/s8/manifests/**"
+      - "tests/**"
+      - ".github/workflows/m365-packages.yml"
+  workflow_dispatch:
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        shell: [pwsh, powershell]
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run package tests
+        shell: ${{ matrix.shell }}
+        run: ./tests/Test-M365Packages.ps1
