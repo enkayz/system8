@@ -13,10 +13,13 @@ if($PSVersionTable.PSVersion.Major -eq 5){[Net.ServicePointManager]::SecurityPro
 
 $required=@('Microsoft.Graph.Authentication','Microsoft.Graph.Users','Microsoft.Graph.Groups','Microsoft.Graph.Identity.DirectoryManagement','Microsoft.Graph.Sites')
 function Ensure-Modules{
-  $missing=@($required|Where-Object{-not(Get-Module -ListAvailable $_)})
-  if($missing -and -not $InstallDependencies){throw "Missing modules: $($missing -join ', '). Re-run with -InstallDependencies."}
-  foreach($m in $missing){Install-Module $m -Scope CurrentUser -Force -AllowClobber -Repository PSGallery}
-  foreach($m in $required){Import-Module $m -ErrorAction Stop}
+  if(-not $env:S8_TOOLCHAIN_ROOT){throw 'The isolated System 8 toolchain is not active. Start this tool from the dashboard or a System 8 command shortcut.'}
+  $expectedRoot=[IO.Path]::GetFullPath((Join-Path $env:S8_TOOLCHAIN_ROOT 'Modules'))
+  foreach($m in $required){
+    $module=Get-Module -ListAvailable $m|Sort-Object Version -Descending|Select-Object -First 1
+    if(-not$module-or-not[IO.Path]::GetFullPath($module.Path).StartsWith($expectedRoot,[StringComparison]::OrdinalIgnoreCase)){throw "The isolated module $m is missing or invalid. Re-run the dashboard installer."}
+    Import-Module $module.Path -ErrorAction Stop
+  }
 }
 function Connect-S8Graph{
   Ensure-Modules
