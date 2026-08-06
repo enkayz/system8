@@ -18,13 +18,13 @@ $Scopes=@(
 
 function Ensure-Modules{
   $required=@('Microsoft.Graph.Authentication')
+  if(-not $env:S8_TOOLCHAIN_ROOT){throw 'The isolated System 8 toolchain is not active. Start this tool from the dashboard or a System 8 command shortcut.'}
+  $expectedRoot=[IO.Path]::GetFullPath((Join-Path $env:S8_TOOLCHAIN_ROOT 'Modules'))
   foreach($m in $required){
-    if(-not(Get-Module -ListAvailable $m)){
-      if(-not $InstallDependencies){throw "Missing $m. Re-run with -InstallDependencies."}
-      Install-Module $m -Scope CurrentUser -Force -AllowClobber
-    }
+    $module=Get-Module -ListAvailable $m|Sort-Object Version -Descending|Select-Object -First 1
+    if(-not$module-or-not[IO.Path]::GetFullPath($module.Path).StartsWith($expectedRoot,[StringComparison]::OrdinalIgnoreCase)){throw "The isolated module $m is missing or invalid. Re-run the dashboard installer."}
+    Import-Module $module.Path -Force
   }
-  Import-Module Microsoft.Graph.Authentication -Force
 }
 function Connect-S8Graph{
   Ensure-Modules

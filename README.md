@@ -71,6 +71,18 @@ Install the package manager without installing ADMX Manager:
 & ([scriptblock]::Create((irm https://raw.githubusercontent.com/enkayz/system8/main/tools/s8/install.ps1))) -NoAdmx
 ```
 
+### Non-admin dashboard
+
+The self-contained System 8 Dashboard installs only for the current Windows user and does not require UAC, a machine-wide certificate, or PATH changes:
+
+```powershell
+& ([scriptblock]::Create((irm https://github.com/enkayz/system8/releases/download/dashboard-v1.0.0/install-dashboard.ps1)))
+```
+
+It discovers and installs operator packages under `%LOCALAPPDATA%\System8`, runs them with the user's existing access, and keeps denied collections as evidence. The installer supplies a checksum-locked portable PowerShell, private Microsoft Graph modules, and an immutable offline operator-package bundle; dashboard and command-line runs exclude profile and machine module paths. The access-request flow suggests the least-privilege role, checks eligible PIM roles when Microsoft Graph allows it, and falls back to a pre-filled administrator or service-desk email. PIM activation and email sending always remain user-confirmed actions.
+
+Source and operating guide: [`tools/s8/dashboard`](tools/s8/dashboard)
+
 ## Current surface
 
 ### `s8` package manager

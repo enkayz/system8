@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "System8Dashboard (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "System8Dashboard (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

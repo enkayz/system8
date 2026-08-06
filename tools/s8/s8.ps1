@@ -29,7 +29,8 @@ function Download-Verified{param($def)
  $zip=Join-Path $Cache ("$($def.name)-$($def.version).zip")
  Invoke-WebRequest -UseBasicParsing -Uri $def.url -OutFile $zip
  $hash=(Get-FileHash $zip -Algorithm SHA256).Hash.ToLowerInvariant()
- if($def.sha256 -and $def.sha256 -ne 'development' -and $hash -ne $def.sha256.ToLowerInvariant()){Remove-Item $zip -Force;throw "SHA256 mismatch for $($def.name)"}
+ if(-not $def.sha256 -or $def.sha256 -eq 'development'){Remove-Item $zip -Force;throw "Release checksum missing for $($def.name)"}
+ if($hash -ne $def.sha256.ToLowerInvariant()){Remove-Item $zip -Force;throw "SHA256 mismatch for $($def.name)"}
  $zip
 }
 function Install-Package{param([string]$n,[string]$c,[switch]$reinstall)

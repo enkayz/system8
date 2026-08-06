@@ -1,0 +1,40 @@
+{
+  "schemaVersion": 1,
+  "powerShell": {
+    "version": "7.6.4",
+    "url": "https://github.com/PowerShell/PowerShell/releases/download/v7.6.4/PowerShell-7.6.4-win-x64.zip",
+    "sha256": "80832551C52809301E6071C8BAC977BEB5A2F1EC953EB4DB9F94DEB953333793"
+  },
+  "modules": [
+    {
+      "name": "Microsoft.Graph.Authentication",
+      "version": "2.38.1",
+      "url": "https://www.powershellgallery.com/api/v2/package/Microsoft.Graph.Authentication/2.38.1",
+      "sha256": "7FDD28CCB79B827BC7FF10AD65DDD7C4FD088E1FE7AFE445114E5C6857F68A23"
+    },
+    {
+      "name": "Microsoft.Graph.Users",
+      "version": "2.38.1",
+      "url": "https://www.powershellgallery.com/api/v2/package/Microsoft.Graph.Users/2.38.1",
+      "sha256": "5FA3F8D00F95C40F5A5DF12640C6215A47E3D603707C96D5BAFEE721FBEC5FB6"
+    },
+    {
+      "name": "Microsoft.Graph.Groups",
+      "version": "2.38.1",
+      "url": "https://www.powershellgallery.com/api/v2/package/Microsoft.Graph.Groups/2.38.1",
+      "sha256": "8A17C986C97C44C199A873BBC539FC592ED27077FE2AD945B609AC614988B0A9"
+    },
+    {
+      "name": "Microsoft.Graph.Identity.DirectoryManagement",
+      "version": "2.38.1",
+      "url": "https://www.powershellgallery.com/api/v2/package/Microsoft.Graph.Identity.DirectoryManagement/2.38.1",
+      "sha256": "FCFDFA627D1C30E09E5018EC8DBDA878F5BB0CF318ED9D3D7815B89A418386D7"
+    },
+    {
+      "name": "Microsoft.Graph.Sites",
+      "version": "2.38.1",
+      "url": "https://www.powershellgallery.com/api/v2/package/Microsoft.Graph.Sites/2.38.1",
+      "sha256": "AB795FFB27873EF140BE7499BB6B92C1F5E9D3DC18378D71CBBEA10227D42B28"
+    }
+  ]
+}

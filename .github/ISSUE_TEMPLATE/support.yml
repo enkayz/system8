@@ -1,0 +1,29 @@
+name: System 8 support
+description: Get help with the System 8 dashboard or an operator package.
+title: "Support: "
+labels: [support]
+body:
+  - type: markdown
+    attributes:
+      value: "Thanks for using System 8. Do not include passwords, tokens, tenant secrets, or sensitive evidence."
+  - type: input
+    id: tool
+    attributes:
+      label: Tool or dashboard area
+      placeholder: e.g. m365-security-baseline
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: What happened?
+      description: Include the safe error summary and expected outcome. Remove tenant-sensitive details.
+    validations:
+      required: true
+  - type: dropdown
+    id: powershell
+    attributes:
+      label: PowerShell
+      options: ["Windows PowerShell 5.1", "PowerShell 7", "Dashboard only", "Not sure"]
+    validations:
+      required: true

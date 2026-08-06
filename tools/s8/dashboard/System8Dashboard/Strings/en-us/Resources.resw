@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <resheader name="reader"><value>System.Resources.ResXResourceReader, System.Windows.Forms</value></resheader>
+  <resheader name="writer"><value>System.Resources.ResXResourceWriter, System.Windows.Forms</value></resheader>
+  <data name="AppTitleBar.Title" xml:space="preserve"><value>System 8 Dashboard</value></data>
+  <data name="ShellNavigation.PaneTitle" xml:space="preserve"><value>System 8</value></data>
+  <data name="ShellNavigation.AutomationProperties.Name" xml:space="preserve"><value>System 8 navigation</value></data>
+  <data name="OverviewNavigation.Content" xml:space="preserve"><value>Overview</value></data>
+  <data name="ToolsNavigation.Content" xml:space="preserve"><value>Tools</value></data>
+  <data name="RequestsNavigation.Content" xml:space="preserve"><value>Access requests</value></data>
+  <data name="SettingsNavigation.Content" xml:space="preserve"><value>Settings</value></data>
+  <data name="SupportNavigation.Content" xml:space="preserve"><value>Get support</value></data>
+  <data name="WelcomeHeading.Text" xml:space="preserve"><value>Your Microsoft 365 operator cockpit</value></data>
+  <data name="WelcomeBody.Text" xml:space="preserve"><value>Run evidence-first System 8 tools with your current access. If a collection is denied, the dashboard explains the gap and prepares the least-privilege next step. Carry the zero.</value></data>
+  <data name="StatusBar.Title" xml:space="preserve"><value>System status</value></data>
+  <data name="OverviewPage.AutomationProperties.Name" xml:space="preserve"><value>Dashboard overview</value></data>
+  <data name="ToolsList.AutomationProperties.Name" xml:space="preserve"><value>Installed System 8 tools</value></data>
+  <data name="RunButton.Label" xml:space="preserve"><value>Run</value></data>
+  <data name="RunButton.AutomationProperties.Name" xml:space="preserve"><value>Run selected tool</value></data>
+  <data name="RefreshButton.Label" xml:space="preserve"><value>Refresh</value></data>
+  <data name="RefreshButton.AutomationProperties.Name" xml:space="preserve"><value>Refresh tool list</value></data>
+  <data name="InstallButton.Label" xml:space="preserve"><value>Install for me</value></data>
+  <data name="InstallButton.AutomationProperties.Name" xml:space="preserve"><value>Install selected tool for the current Windows user</value></data>
+  <data name="EvidenceButton.Label" xml:space="preserve"><value>Evidence</value></data>
+  <data name="EvidenceButton.AutomationProperties.Name" xml:space="preserve"><value>Open evidence folder</value></data>
+  <data name="ArgumentsBox.Header" xml:space="preserve"><value>Command and options</value></data>
+  <data name="ArgumentsBox.PlaceholderText" xml:space="preserve"><value>Example: full</value></data>
+  <data name="ResultBox.Header" xml:space="preserve"><value>Run output</value></data>
+  <data name="RequestFromRunButton.Content" xml:space="preserve"><value>Request access</value></data>
+  <data name="RequestsHeading.Text" xml:space="preserve"><value>Access without guesswork</value></data>
+  <data name="RequestsBody.Text" xml:space="preserve"><value>System 8 keeps the evidence, suggests the least-privilege role, checks whether you have a matching eligible PIM assignment, and otherwise prepares an administrator email. Nothing is elevated silently.</value></data>
+  <data name="AdministratorEmailBox.Header" xml:space="preserve"><value>Administrator or service desk email</value></data>
+  <data name="AdministratorEmailBox.PlaceholderText" xml:space="preserve"><value>Optional — leave blank to choose a recipient in your mail app</value></data>
+  <data name="PrepareRequestButton.Label" xml:space="preserve"><value>Prepare email</value></data>
+  <data name="PrepareRequestButton.AutomationProperties.Name" xml:space="preserve"><value>Prepare administrator access request</value></data>
+  <data name="CheckPimButton.Label" xml:space="preserve"><value>Check PIM</value></data>
+  <data name="CheckPimButton.AutomationProperties.Name" xml:space="preserve"><value>Check eligible Privileged Identity Management roles</value></data>
+  <data name="RequestBodyBox.Header" xml:space="preserve"><value>Request preview</value></data>
+  <data name="RequestBodyBox.PlaceholderText" xml:space="preserve"><value>Run a tool first. If access is denied, System 8 will prepare an evidence-backed request here.</value></data>
+  <data name="SettingsHeading.Text" xml:space="preserve"><value>Make it yours</value></data>
+  <data name="SettingsBody.Text" xml:space="preserve"><value>The dashboard follows Windows by default and stores settings only for your Windows profile.</value></data>
+  <data name="ThemeSelector.Header" xml:space="preserve"><value>App theme</value></data>
+  <data name="ThemeSystem.Content" xml:space="preserve"><value>Use Windows setting</value></data>
+  <data name="ThemeLight.Content" xml:space="preserve"><value>Light</value></data>
+  <data name="ThemeDark.Content" xml:space="preserve"><value>Dark</value></data>
+  <data name="ToolchainHeading.Text" xml:space="preserve"><value>Private System 8 toolchain</value></data>
+  <data name="ToolchainBody.Text" xml:space="preserve"><value>Tool runs use a pinned portable PowerShell and private Microsoft Graph modules. System 8 blocks modules from your profile and machine.</value></data>
+  <data name="ToolchainReadyFormat" xml:space="preserve"><value>Ready: PowerShell {0} · Microsoft Graph {1}</value></data>
+  <data name="SupportButton.Content" xml:space="preserve"><value>Contact System 8 support</value></data>
+  <data name="StatusReady" xml:space="preserve"><value>Ready. Choose a tool to begin.</value></data>
+  <data name="StatusChooseTool" xml:space="preserve"><value>Choose a tool first.</value></data>
+  <data name="StatusToolsFoundFormat" xml:space="preserve"><value>{0} operator tools found. Private toolchain ready; runs use your current Microsoft 365 access.</value></data>
+  <data name="StatusCompletedFormat" xml:space="preserve"><value>Completed. Evidence saved to {0}</value></data>
+  <data name="StatusExitCodeFormat" xml:space="preserve"><value>The tool finished with exit code {0}. Review the evidence or request access.</value></data>
+  <data name="StatusRunFailed" xml:space="preserve"><value>The run could not start. Check package availability and try again.</value></data>
+  <data name="StatusRequestRunFirst" xml:space="preserve"><value>Run a tool before preparing an access request.</value></data>
+  <data name="StatusRequestPreparedFormat" xml:space="preserve"><value>Access request prepared at {0}</value></data>
+  <data name="StatusInstalled" xml:space="preserve"><value>Installed for your Windows profile. Administrator access was not requested.</value></data>
+  <data name="StatusInstallFailed" xml:space="preserve"><value>Per-user installation did not complete. Open support if you need a hand.</value></data>
+  <data name="PimDialogTitle" xml:space="preserve"><value>Check eligible PIM roles</value></data>
+  <data name="PimDialogContentFormat" xml:space="preserve"><value>Your evidence-backed justification has been copied. A matching eligible role was found: {0}. System 8 will open My roles in Microsoft Entra so you can submit the time-bound activation to its configured approver.</value></data>
+  <data name="PimDialogPrimary" xml:space="preserve"><value>Open My roles</value></data>
+  <data name="PimDialogClose" xml:space="preserve"><value>Not now</value></data>
+  <data name="StatusCheckingPim" xml:space="preserve"><value>Checking your eligible Microsoft Entra PIM roles…</value></data>
+  <data name="StatusPimFoundFormat" xml:space="preserve"><value>Matching eligible role found: {0}. Your evidence-backed request is ready.</value></data>
+  <data name="StatusPimFallbackFormat" xml:space="preserve"><value>PIM could not provide a matching route: {0} Opening the administrator email request.</value></data>
+</root>

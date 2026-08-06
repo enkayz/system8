@@ -27,3 +27,14 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# WinUI dashboard build output and generated scaffold guidance
+tools/s8/dashboard/System8Dashboard/bin/
+tools/s8/dashboard/System8Dashboard/obj/
+tools/s8/dashboard/System8Dashboard/AppPackages/
+tools/s8/dashboard/System8Dashboard.Core/bin/
+tools/s8/dashboard/System8Dashboard.Core/obj/
+tools/s8/dashboard/System8Dashboard.Core.Tests/bin/
+tools/s8/dashboard/System8Dashboard.Core.Tests/obj/
+tools/s8/dashboard/System8Dashboard/AGENTS.md
+tools/s8/dashboard/System8Dashboard/.github/instructions/
