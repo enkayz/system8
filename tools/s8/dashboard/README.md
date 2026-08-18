@@ -7,7 +7,7 @@ The System 8 Dashboard is the non-admin Windows front end for the Microsoft 365 
 Run from Windows PowerShell 5.1 or PowerShell 7. Administrator rights are not required.
 
 ```powershell
-& ([scriptblock]::Create((irm https://github.com/enkayz/system8/releases/download/dashboard-v1.0.0/install-dashboard.ps1)))
+$url='https://github.com/enkayz/system8/releases/download/dashboard-v1.0.0/install-dashboard.ps1'; $path=Join-Path $env:TEMP 'system8-dashboard-install.ps1'; Invoke-WebRequest -UseBasicParsing $url -OutFile $path; if((Get-FileHash $path -Algorithm SHA256).Hash.ToLowerInvariant() -ne 'e2719096d0cc3d5491622eb7adf9a855dcfdbd282e5ef490c50065c9884765a2'){Remove-Item $path -Force; throw 'SHA256 mismatch; operation stopped.'}; & $path
 ```
 
 The versioned installer downloads the self-contained x64 dashboard archive, validates its published SHA-256 checksum, stages and validates the replacement before switching, installs it under `%LOCALAPPDATA%\System8\dashboard`, adds a Start menu shortcut, and opens it. The same archive installs System 8's pinned portable PowerShell 7.6.4 and Microsoft Graph 2.38.1 modules under `%LOCALAPPDATA%\System8\Toolchain`. Tool runs reset `PSModulePath` inside that private runtime, so Graph modules from the Windows profile or machine are not loaded. The installer does not request UAC, change machine PATH, or write outside the current user profile.
@@ -17,19 +17,19 @@ Operator packages are shipped in one immutable `System8Packages-1.0.0.zip` relea
 Preview the install without changing anything:
 
 ```powershell
-& ([scriptblock]::Create((irm https://github.com/enkayz/system8/releases/download/dashboard-v1.0.0/install-dashboard.ps1))) -WhatIf
+$url='https://github.com/enkayz/system8/releases/download/dashboard-v1.0.0/install-dashboard.ps1'; $path=Join-Path $env:TEMP 'system8-dashboard-install.ps1'; Invoke-WebRequest -UseBasicParsing $url -OutFile $path; if((Get-FileHash $path -Algorithm SHA256).Hash.ToLowerInvariant() -ne 'e2719096d0cc3d5491622eb7adf9a855dcfdbd282e5ef490c50065c9884765a2'){Remove-Item $path -Force; throw 'SHA256 mismatch; operation stopped.'}; & $path -WhatIf
 ```
 
 Remove the app from the current user profile:
 
 ```powershell
-& ([scriptblock]::Create((irm https://github.com/enkayz/system8/releases/download/dashboard-v1.0.0/install-dashboard.ps1))) -Uninstall
+$url='https://github.com/enkayz/system8/releases/download/dashboard-v1.0.0/install-dashboard.ps1'; $path=Join-Path $env:TEMP 'system8-dashboard-install.ps1'; Invoke-WebRequest -UseBasicParsing $url -OutFile $path; if((Get-FileHash $path -Algorithm SHA256).Hash.ToLowerInvariant() -ne 'e2719096d0cc3d5491622eb7adf9a855dcfdbd282e5ef490c50065c9884765a2'){Remove-Item $path -Force; throw 'SHA256 mismatch; operation stopped.'}; & $path -Uninstall
 ```
 
 Installed operator command-line tools share the private runtime, so the toolchain is retained by default. Remove both the dashboard and toolchain only when those commands are no longer needed:
 
 ```powershell
-& ([scriptblock]::Create((irm https://github.com/enkayz/system8/releases/download/dashboard-v1.0.0/install-dashboard.ps1))) -Uninstall -RemoveToolchain
+$url='https://github.com/enkayz/system8/releases/download/dashboard-v1.0.0/install-dashboard.ps1'; $path=Join-Path $env:TEMP 'system8-dashboard-install.ps1'; Invoke-WebRequest -UseBasicParsing $url -OutFile $path; if((Get-FileHash $path -Algorithm SHA256).Hash.ToLowerInvariant() -ne 'e2719096d0cc3d5491622eb7adf9a855dcfdbd282e5ef490c50065c9884765a2'){Remove-Item $path -Force; throw 'SHA256 mismatch; operation stopped.'}; & $path -Uninstall -RemoveToolchain
 ```
 
 ## Access behavior

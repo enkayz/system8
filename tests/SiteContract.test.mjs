@@ -59,17 +59,30 @@ test("every catalogue command is provided by its package launcher", async () => 
 });
 
 test("published installation guidance has no mutable admin execution path", async () => {
-  const [readme, bootstrap, cli] = await Promise.all([
+  const [readme, dashboardReadme, bootstrap, cli] = await Promise.all([
     read("README.md"),
+    read("tools/s8/dashboard/README.md"),
     read("tools/s8/install.ps1"),
     read("tools/s8/s8.ps1"),
   ]);
-  assert.doesNotMatch(readme, /raw\.githubusercontent\.com\/enkayz\/system8\/main\//);
-  assert.doesNotMatch(readme, /ScriptBlock\]::Create\(\(irm/i);
+  const publishedGuidance = readme + dashboardReadme;
+  assert.doesNotMatch(publishedGuidance, /raw\.githubusercontent\.com\/enkayz\/system8\/main\//);
+  assert.doesNotMatch(publishedGuidance, /ScriptBlock\]::Create\(\(irm/i);
+  assert.match(dashboardReadme, /e2719096d0cc3d5491622eb7adf9a855dcfdbd282e5ef490c50065c9884765a2/);
   assert.doesNotMatch(readme, /s8tenantdiff|s8secure/);
   assert.match(readme, /s8diff/);
   assert.match(readme, /s8baseline/);
   assert.doesNotMatch(bootstrap, /&\s*\$cli\s+install\s+admx/i);
   assert.match(cli, /120a14e61a86a693545f1709e35cafd483b2e175\/tools\/s8\/manifests\/stable\.json/);
   assert.match(cli, /6fc931ec2802b39111f8261553f708ec6b5b84fdc33ce95364b58cbadfd1bbc6/);
+});
+
+test("copied starter commands run without missing mandatory arguments", async () => {
+  const app = await read("src/App.tsx");
+  const commands = new Map([...app.matchAll(/name: "([^"]+)", command: "([^"]+)"/g)].map(([, name, command]) => [name, command]));
+  assert.equal(commands.get("m365-tenant-diff"), "s8diff doctor");
+  assert.equal(commands.get("m365-migration-estimator"), "s8migrate template");
+  assert.equal(commands.get("m365-entitlement-advisor"), "s8entitlement template");
+  assert.equal(commands.get("m365-access-explainer"), "s8access doctor");
+  assert.equal(commands.get("m365-leaver-readiness"), "s8leaver doctor");
 });
