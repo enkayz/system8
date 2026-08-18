@@ -41,8 +41,8 @@ test("the site exposes source, installer and safety boundaries", async () => {
   assert.match(app, /SHA256 mismatch/);
   assert.doesNotMatch(bootstrap, /raw\.githubusercontent\.com\/enkayz\/system8\/main\//);
   assert.match(bootstrap, /Get-FileHash/);
-  assert.match(cli, /d8c0fa6c8428ac503113222c0f19103cbec87d5d\/tools\/s8\/manifests\/stable\.json/);
-  assert.match(cli, /75748d96f9654aefea43992dc05917aeb2dcc49bbc57c6476fc6541ebad5270e/);
+  assert.match(cli, /60cf03810bcc00656fc6f78a0fbb87100a3fa5e4\/tools\/s8\/manifests\/stable\.json/);
+  assert.match(cli, /c626f35e460f79d334df18133d2465c0227acb25d87023bba1f3b8d5b00d2b87/);
   assert.match(app, /Read-only by design/);
   assert.match(app, /No tenant credentials/);
 });
@@ -81,8 +81,8 @@ test("published installation guidance has no mutable admin execution path", asyn
   assert.match(readme, /s8diff/);
   assert.match(readme, /s8baseline/);
   assert.doesNotMatch(bootstrap, /&\s*\$cli\s+install\s+admx/i);
-  assert.match(cli, /d8c0fa6c8428ac503113222c0f19103cbec87d5d\/tools\/s8\/manifests\/stable\.json/);
-  assert.match(cli, /75748d96f9654aefea43992dc05917aeb2dcc49bbc57c6476fc6541ebad5270e/);
+  assert.match(cli, /60cf03810bcc00656fc6f78a0fbb87100a3fa5e4\/tools\/s8\/manifests\/stable\.json/);
+  assert.match(cli, /c626f35e460f79d334df18133d2465c0227acb25d87023bba1f3b8d5b00d2b87/);
 });
 
 test("copied starter commands run without missing mandatory arguments", async () => {
