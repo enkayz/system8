@@ -63,11 +63,12 @@ test("published installation guidance has no mutable admin execution path", asyn
   const packageReadmes = await Promise.all(packageEntries.filter((entry) => entry.isDirectory()).map(async (entry) => {
     try { return await read(`tools/s8/packages/${entry.name}/README.md`); } catch { return ""; }
   }));
-  const [readme, dashboardReadme, bootstrap, cli] = await Promise.all([
+  const [readme, dashboardReadme, bootstrap, cli, stableManifest] = await Promise.all([
     read("README.md"),
     read("tools/s8/dashboard/README.md"),
     read("tools/s8/install.ps1"),
     read("tools/s8/s8.ps1"),
+    read("tools/s8/manifests/stable.json"),
   ]);
   const publishedGuidance = readme + dashboardReadme + packageReadmes.join("\n");
   assert.doesNotMatch(publishedGuidance, /raw\.githubusercontent\.com\/enkayz\/system8\/main\//);
@@ -75,6 +76,7 @@ test("published installation guidance has no mutable admin execution path", asyn
   assert.doesNotMatch(publishedGuidance, /s8tenantdiff|s8secure/);
   assert.match(dashboardReadme, /withdrawn from supported installation paths/i);
   assert.doesNotMatch(dashboardReadme, /releases\/download\/dashboard-v1\.0\.0/);
+  assert.equal(JSON.parse(stableManifest).packages.some(({ name }) => name === "dashboard"), false);
   assert.doesNotMatch(readme, /s8tenantdiff|s8secure/);
   assert.match(readme, /s8diff/);
   assert.match(readme, /s8baseline/);
