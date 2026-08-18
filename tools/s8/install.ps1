@@ -16,8 +16,8 @@ if(-not $principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrat
 }
 $bin=Join-Path $env:ProgramFiles 'System8\bin'
 New-Item -ItemType Directory -Path $bin -Force|Out-Null
-$cliUrl='https://raw.githubusercontent.com/enkayz/system8/b1deb042aa131493bfaec5c3313e438fa4f1fc89/tools/s8/s8.ps1'
-$cliSha256='d808b0996841b1b0c91d65e329144de671e46842442dd52d14968f8799aebe57'
+$cliUrl='https://raw.githubusercontent.com/enkayz/system8/bf24d09ef4f7cf6adc66838872ee53d229112596/tools/s8/s8.ps1'
+$cliSha256='7aaa39d683080de1fbae7a946389793fcef8edbb19c62137c6b700772b75a337'
 $cli=Join-Path $bin 's8.ps1'
 Invoke-WebRequest -UseBasicParsing -Uri $cliUrl -OutFile $cli
 $actualCliHash=(Get-FileHash $cli -Algorithm SHA256).Hash.ToLowerInvariant()
