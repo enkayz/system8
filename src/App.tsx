@@ -59,7 +59,7 @@ function App() {
       <header className="masthead">
         <a className="brand" href="#top" aria-label="System 8 home"><span className="brand-mark">8</span><span>System 8</span></a>
         <nav aria-label="Primary navigation">
-          <a href="#tools">Tools</a><a href="#harness">Harness</a><a href="#safety">Safety</a>
+          <a href="#tools">Tools</a><a href="#examples">Examples</a><a href="#harness">Harness</a><a href="#safety">Safety</a>
           <a href="https://github.com/enkayz/system8" target="_blank" rel="noreferrer">GitHub ↗</a>
         </nav>
       </header>
@@ -112,13 +112,34 @@ function App() {
           {filtered.length === 0 && <p className="empty">No tools match this filter.</p>}
         </section>
 
+        <section className="examples" id="examples" aria-labelledby="examples-title">
+          <div className="section-heading"><div><span className="section-index">03</span><h2 id="examples-title">Government operating examples</h2></div><p>Synthetic, approval-gated patterns for planning and assurance—not production runbooks.</p></div>
+          <div className="example-grid">
+            <article className="example-card">
+              <span>Migration planning</span><h3>DPLH LASP migration</h3>
+              <p>Model a provisional legacy workload inventory, preserve assumptions, and gate discovery, rehearsal, pilot, cutover and rollback with evidence.</p>
+              <a href="https://github.com/enkayz/system8/blob/main/docs/examples/government/dplh-lasp-migration.md" target="_blank" rel="noreferrer">Open example ↗</a>
+            </article>
+            <article className="example-card">
+              <span>Infrastructure assurance</span><h3>TLS management</h3>
+              <p>Baseline certificates, cipher support, Schannel evidence and application dependencies before an approved, bounded compatibility change.</p>
+              <a href="https://github.com/enkayz/system8/blob/main/docs/examples/government/tls-management.md" target="_blank" rel="noreferrer">Open example ↗</a>
+            </article>
+            <article className="example-card">
+              <span>Information protection</span><h3>DLP management</h3>
+              <p>Take a Microsoft Purview DLP control from evidence and policy design through simulation, tuning, staged enforcement and rollback.</p>
+              <a href="https://github.com/enkayz/system8/blob/main/docs/examples/government/dlp-management.md" target="_blank" rel="noreferrer">Open example ↗</a>
+            </article>
+          </div>
+        </section>
+
         <section className="install" id="install" aria-labelledby="install-title">
-          <div><span className="section-index light">03</span><h2 id="install-title">One command.<br />A governed toolkit.</h2><p>Run in Windows PowerShell 5.1 or PowerShell 7. The bootstrap self-elevates for the machine-wide installation.</p></div>
+          <div><span className="section-index light">04</span><h2 id="install-title">One command.<br />A governed toolkit.</h2><p>Run in Windows PowerShell 5.1 or PowerShell 7. The bootstrap self-elevates for the machine-wide installation.</p></div>
           <div className="terminal-card"><div className="terminal-bar"><span>PowerShell</span><span>machine install</span></div><code>{installer}</code><button onClick={() => copy(installer, "installer")}>{copied === "installer" ? "Copied to clipboard" : "Copy installer"}</button></div>
         </section>
 
         <section className="harness" id="harness" aria-labelledby="harness-title">
-          <div><span className="section-index">04</span><h2 id="harness-title">Run the verified fixture harness</h2></div>
+          <div><span className="section-index">05</span><h2 id="harness-title">Run the verified fixture harness</h2></div>
           <div className="harness-body">
             <p>The repository harness parses every PowerShell file, validates package manifest paths, installs five core packages into an isolated temporary root, runs help and offline fixture reports, compares tenant snapshots, and produces a migration estimate.</p>
             <div className="verification-list" aria-label="Harness checks"><span>SYNTAX_OK</span><span>MANIFEST_PATHS_OK</span><span>CLEAN_INSTALL_OK</span><span>HELP_AND_FIXTURE_REPORTS_OK</span><span>TENANT_DIFF_FIXTURE_OK</span><span>MIGRATION_FIXTURE_OK</span></div>

@@ -71,6 +71,16 @@ The previous `dashboard-v1.0.0` binary is withdrawn from supported installation 
 
 Source and current release status: [`tools/s8/dashboard`](tools/s8/dashboard)
 
+### Government operating examples
+
+These synthetic examples show how the evidence-led approach can be adapted to bounded government work without presenting assumptions as production facts:
+
+- [DPLH LASP migration planning](docs/examples/government/dplh-lasp-migration.md) — offline effort modelling, evidence gates, rehearsal, cutover and rollback.
+- [TLS management](docs/examples/government/tls-management.md) — certificate, cipher, Schannel and application-path baselining before approved change.
+- [DLP management](docs/examples/government/dlp-management.md) — Microsoft Purview discovery, simulation, tuning, staged enforcement and rollback.
+
+The LASP CSV is synthetic and contains no DPLH production information: [`dplh-lasp-migration-input.csv`](docs/examples/government/dplh-lasp-migration-input.csv).
+
 ## Current surface
 
 ### `s8` package manager

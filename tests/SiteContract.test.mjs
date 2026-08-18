@@ -106,3 +106,29 @@ test("machine and per-user command maps use the same current launchers", async (
     assert.match(source, /s8baseline/);
   }
 });
+
+test("government examples are evidence-led and explicitly non-production", async () => {
+  const [app, migration, tls, dlp, sample] = await Promise.all([
+    read("src/App.tsx"),
+    read("docs/examples/government/dplh-lasp-migration.md"),
+    read("docs/examples/government/tls-management.md"),
+    read("docs/examples/government/dlp-management.md"),
+    read("docs/examples/government/dplh-lasp-migration-input.csv"),
+  ]);
+  assert.match(app, /DPLH LASP migration/i);
+  assert.match(app, /TLS management/i);
+  assert.match(app, /DLP management/i);
+  for (const guide of [migration, tls, dlp]) {
+    assert.match(guide, /EXAMPLE — NOT PRODUCTION INSTRUCTIONS/);
+    assert.match(guide, /approval/i);
+    assert.match(guide, /rollback/i);
+    assert.match(guide, /evidence/i);
+  }
+  assert.match(migration, /s8migrate estimate/);
+  assert.match(sample, /LASP legacy document library/);
+  assert.match(tls, /TLS 1\.2/);
+  assert.match(tls, /certificate/i);
+  assert.match(dlp, /simulation/i);
+  assert.match(dlp, /Purview/i);
+  assert.doesNotMatch(migration + tls + dlp + sample, /real production data/i);
+});
