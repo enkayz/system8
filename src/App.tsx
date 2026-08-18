@@ -8,7 +8,7 @@ type Tool = {
   mode: string;
 };
 
-const installer = "irm https://raw.githubusercontent.com/enkayz/system8/main/tools/s8/install.ps1 | iex";
+const installer = "$url='https://raw.githubusercontent.com/enkayz/system8/56a8f9ddbd0789aa8c957a1bc09424c310e77d29/tools/s8/install.ps1'; $path=Join-Path $env:TEMP 'system8-install.ps1'; Invoke-WebRequest -UseBasicParsing $url -OutFile $path; if((Get-FileHash $path -Algorithm SHA256).Hash.ToLowerInvariant() -ne 'f331e7daec7cba05d26791823880016062e2c290c887d9a7a86e34361b9c9471'){Remove-Item $path -Force; throw 'SHA256 mismatch; installation stopped.'}; & $path";
 
 const tools: Tool[] = [
   { name: "m365", command: "s8m365 full", category: "Governance", description: "Tenant, user, role, licence, labels and sharing inventory with evidence output.", mode: "Microsoft Graph · read-only" },
@@ -32,19 +32,26 @@ function App() {
   const [category, setCategory] = useState<(typeof categories)[number]>("All");
   const [query, setQuery] = useState("");
   const [copied, setCopied] = useState<string | null>(null);
+  const [copyError, setCopyError] = useState<string | null>(null);
 
   const filtered = useMemo(() => {
-    const needle = query.trim().toLowerCase();
-    return tools.filter((tool) =>
-      (category === "All" || tool.category === category) &&
-      (!needle || `${tool.name} ${tool.description} ${tool.command}`.toLowerCase().includes(needle)),
-    );
+    const tokens = query.trim().toLowerCase().split(/[\s-]+/).filter(Boolean);
+    return tools.filter((tool) => {
+      const haystack = `${tool.name} ${tool.description} ${tool.command}`.toLowerCase();
+      return (category === "All" || tool.category === category) && tokens.every((token) => haystack.includes(token));
+    });
   }, [category, query]);
 
   async function copy(value: string, label: string) {
-    await navigator.clipboard.writeText(value);
-    setCopied(label);
-    window.setTimeout(() => setCopied(null), 1800);
+    try {
+      await navigator.clipboard.writeText(value);
+      setCopyError(null);
+      setCopied(label);
+      window.setTimeout(() => setCopied(null), 1800);
+    } catch {
+      setCopied(null);
+      setCopyError(`Could not copy ${label}. Select the command manually.`);
+    }
   }
 
   return (
@@ -121,7 +128,7 @@ function App() {
       </main>
 
       <footer><div><span className="brand-mark">8</span><strong>System 8</strong></div><p>Interfaces, automation and infrastructure treated as one operating system.</p><a href="https://github.com/enkayz/system8">Inspect the source ↗</a></footer>
-      <div className="toast" aria-live="polite">{copied ? `${copied} copied` : ""}</div>
+      <div className="toast" aria-live="polite">{copyError ?? (copied ? `${copied} copied` : "")}</div>
     </>
   );
 }
