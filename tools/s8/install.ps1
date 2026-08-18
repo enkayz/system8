@@ -16,9 +16,12 @@ if(-not $principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrat
 }
 $bin=Join-Path $env:ProgramFiles 'System8\bin'
 New-Item -ItemType Directory -Path $bin -Force|Out-Null
-$cliUrl='https://raw.githubusercontent.com/enkayz/system8/main/tools/s8/s8.ps1'
+$cliUrl='https://raw.githubusercontent.com/enkayz/system8/f93d1a80ef38e1efc63c7dc068f80861b76d9d4b/tools/s8/s8.ps1'
+$cliSha256='e66ffae6c8f466ce0587805ede8b027a2f7dcace000d6cc47443e4a3cc45bb0b'
 $cli=Join-Path $bin 's8.ps1'
 Invoke-WebRequest -UseBasicParsing -Uri $cliUrl -OutFile $cli
+$actualCliHash=(Get-FileHash $cli -Algorithm SHA256).Hash.ToLowerInvariant()
+if($actualCliHash -ne $cliSha256){Remove-Item $cli -Force;throw 'System 8 CLI SHA256 mismatch; installation stopped.'}
 $cmd=Join-Path $bin 's8.cmd'
 @'
 @echo off
