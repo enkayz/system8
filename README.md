@@ -50,10 +50,10 @@ The repository includes a PowerShell 5.1/7-compatible package manager for System
 ### One-line install
 
 ```powershell
-$url='https://raw.githubusercontent.com/enkayz/system8/9c813a61cab07f31b536d72947d31a928cc9828a/tools/s8/install.ps1'; $path=Join-Path $env:TEMP 'system8-install.ps1'; Invoke-WebRequest -UseBasicParsing $url -OutFile $path; if((Get-FileHash $path -Algorithm SHA256).Hash.ToLowerInvariant() -ne '14b9026e4e18ff9601e5458e3e143aababf34b5c4c6f1f17ce7c635d0dec87d8'){Remove-Item $path -Force; throw 'SHA256 mismatch; installation stopped.'}; & $path -NoAdmx
+$url='https://raw.githubusercontent.com/enkayz/system8/16209c8507716280dbbaf8b6ea9675d503887b3f/tools/s8/install.ps1'; $path=Join-Path $env:TEMP 'system8-install.ps1'; Invoke-WebRequest -UseBasicParsing $url -OutFile $path; if((Get-FileHash $path -Algorithm SHA256).Hash.ToLowerInvariant() -ne '68a7de20782641192e0360702d150cf55a02f297cc9b8a1fffcef7b55a5cea05'){Remove-Item $path -Force; throw 'SHA256 mismatch; installation stopped.'}; & $path -NoAdmx
 ```
 
-The bootstrap is pinned to an immutable commit and verified before it self-elevates, installs `s8`, and adds it to the machine `PATH`. The installed CLI independently verifies its pinned payload and stable manifest. Automatic ADMX installation is disabled until an immutable verified ADMX package is released.
+The bootstrap is pinned to an immutable commit and verified before it self-elevates, installs `s8`, and adds it to the machine `PATH`. The installed CLI independently verifies its pinned payload, stable manifest and package archive. Automatic ADMX installation remains disabled; operators can install the now-verified package explicitly with `s8 install admx`.
 
 ```powershell
 s8 list
