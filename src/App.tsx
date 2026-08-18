@@ -118,17 +118,17 @@ function App() {
             <article className="example-card">
               <span>Migration planning</span><h3>DPLH LASP migration</h3>
               <p>Model a provisional legacy workload inventory, preserve assumptions, and gate discovery, rehearsal, pilot, cutover and rollback with evidence.</p>
-              <a href="https://github.com/enkayz/system8/blob/main/docs/examples/government/dplh-lasp-migration.md" target="_blank" rel="noreferrer">Open example ↗</a>
+              <a href="https://github.com/enkayz/system8/blob/81aaf05f3c7326ad5b51681b5bd5383653dc48db/docs/examples/government/dplh-lasp-migration.md" target="_blank" rel="noreferrer">Open example ↗</a>
             </article>
             <article className="example-card">
               <span>Infrastructure assurance</span><h3>TLS management</h3>
               <p>Baseline certificates, cipher support, Schannel evidence and application dependencies before an approved, bounded compatibility change.</p>
-              <a href="https://github.com/enkayz/system8/blob/main/docs/examples/government/tls-management.md" target="_blank" rel="noreferrer">Open example ↗</a>
+              <a href="https://github.com/enkayz/system8/blob/81aaf05f3c7326ad5b51681b5bd5383653dc48db/docs/examples/government/tls-management.md" target="_blank" rel="noreferrer">Open example ↗</a>
             </article>
             <article className="example-card">
               <span>Information protection</span><h3>DLP management</h3>
               <p>Take a Microsoft Purview DLP control from evidence and policy design through simulation, tuning, staged enforcement and rollback.</p>
-              <a href="https://github.com/enkayz/system8/blob/main/docs/examples/government/dlp-management.md" target="_blank" rel="noreferrer">Open example ↗</a>
+              <a href="https://github.com/enkayz/system8/blob/81aaf05f3c7326ad5b51681b5bd5383653dc48db/docs/examples/government/dlp-management.md" target="_blank" rel="noreferrer">Open example ↗</a>
             </article>
           </div>
         </section>
