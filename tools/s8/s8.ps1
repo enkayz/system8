@@ -15,8 +15,8 @@ $Root=Join-Path $env:ProgramData 'System8\Packages'
 $State=Join-Path $Root 'state.json'
 $Cache=Join-Path $Root 'cache'
 $Backups=Join-Path $Root 'backups'
-$StableManifest='https://raw.githubusercontent.com/enkayz/system8/14bad625949341bbf335e3a199a1077c201c0f74/tools/s8/manifests/stable.json'
-$StableManifestSha256='846185e8dc9ad5c618016bec340a6459c33e8a879569c4131c17c8d15f1f4376'
+$StableManifest='https://raw.githubusercontent.com/enkayz/system8/d8c0fa6c8428ac503113222c0f19103cbec87d5d/tools/s8/manifests/stable.json'
+$StableManifestSha256='75748d96f9654aefea43992dc05917aeb2dcc49bbc57c6476fc6541ebad5270e'
 $DevelopmentBase='https://raw.githubusercontent.com/enkayz/system8/main/tools/s8'
 @($Root,$Cache,$Backups)|ForEach-Object{New-Item -ItemType Directory -Path $_ -Force|Out-Null}
 function Get-State{if(Test-Path $State){Get-Content $State -Raw|ConvertFrom-Json}else{[pscustomobject]@{channel='stable';packages=[pscustomobject]@{}}}}
