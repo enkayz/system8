@@ -67,15 +67,9 @@ s8 remove m365
 
 ### Non-admin dashboard
 
-The self-contained System 8 Dashboard installs only for the current Windows user and does not require UAC, a machine-wide certificate, or PATH changes:
+The previous `dashboard-v1.0.0` binary is withdrawn from supported installation paths because its per-user command map predates the current launchers. Do not install that release. The corrected dashboard source remains available for review, and a new Windows artifact must pass the same immutable-chain and launcher-parity checks before publication.
 
-```powershell
-$url='https://github.com/enkayz/system8/releases/download/dashboard-v1.0.0/install-dashboard.ps1'; $path=Join-Path $env:TEMP 'system8-dashboard-install.ps1'; Invoke-WebRequest -UseBasicParsing $url -OutFile $path; if((Get-FileHash $path -Algorithm SHA256).Hash.ToLowerInvariant() -ne 'e2719096d0cc3d5491622eb7adf9a855dcfdbd282e5ef490c50065c9884765a2'){Remove-Item $path -Force; throw 'SHA256 mismatch; installation stopped.'}; & $path
-```
-
-It discovers and installs operator packages under `%LOCALAPPDATA%\System8`, runs them with the user's existing access, and keeps denied collections as evidence. The installer supplies a checksum-locked portable PowerShell, private Microsoft Graph modules, and an immutable offline operator-package bundle; dashboard and command-line runs exclude profile and machine module paths. The access-request flow suggests the least-privilege role, checks eligible PIM roles when Microsoft Graph allows it, and falls back to a pre-filled administrator or service-desk email. PIM activation and email sending always remain user-confirmed actions.
-
-Source and operating guide: [`tools/s8/dashboard`](tools/s8/dashboard)
+Source and current release status: [`tools/s8/dashboard`](tools/s8/dashboard)
 
 ## Current surface
 

@@ -73,7 +73,8 @@ test("published installation guidance has no mutable admin execution path", asyn
   assert.doesNotMatch(publishedGuidance, /raw\.githubusercontent\.com\/enkayz\/system8\/main\//);
   assert.doesNotMatch(publishedGuidance, /ScriptBlock\]::Create\(\(irm/i);
   assert.doesNotMatch(publishedGuidance, /s8tenantdiff|s8secure/);
-  assert.match(dashboardReadme, /e2719096d0cc3d5491622eb7adf9a855dcfdbd282e5ef490c50065c9884765a2/);
+  assert.match(dashboardReadme, /withdrawn from supported installation paths/i);
+  assert.doesNotMatch(dashboardReadme, /releases\/download\/dashboard-v1\.0\.0/);
   assert.doesNotMatch(readme, /s8tenantdiff|s8secure/);
   assert.match(readme, /s8diff/);
   assert.match(readme, /s8baseline/);
@@ -90,4 +91,16 @@ test("copied starter commands run without missing mandatory arguments", async ()
   assert.equal(commands.get("m365-entitlement-advisor"), "s8entitlement template");
   assert.equal(commands.get("m365-access-explainer"), "s8access doctor");
   assert.equal(commands.get("m365-leaver-readiness"), "s8leaver doctor");
+});
+
+test("machine and per-user command maps use the same current launchers", async () => {
+  const [userInstaller, dashboardCatalog] = await Promise.all([
+    read("tools/s8/install-user.ps1"),
+    read("tools/s8/dashboard/System8Dashboard.Core/Services/ToolCatalogService.cs"),
+  ]);
+  for (const source of [userInstaller, dashboardCatalog]) {
+    assert.doesNotMatch(source, /s8tenantdiff|s8secure/);
+    assert.match(source, /s8diff/);
+    assert.match(source, /s8baseline/);
+  }
 });

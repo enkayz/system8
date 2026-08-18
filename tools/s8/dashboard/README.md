@@ -2,35 +2,11 @@
 
 The System 8 Dashboard is the non-admin Windows front end for the Microsoft 365 operator toolkit. It runs each package with the signed-in user's existing Windows and Microsoft 365 access, keeps partial collection failures as evidence, and never bypasses tenant authorization.
 
-## Install for the current Windows user
+## Release status
 
-Run from Windows PowerShell 5.1 or PowerShell 7. Administrator rights are not required.
+The previous `dashboard-v1.0.0` artifact is withdrawn from supported installation paths because its per-user package map creates obsolete launchers. Do not install or redistribute that binary release.
 
-```powershell
-$url='https://github.com/enkayz/system8/releases/download/dashboard-v1.0.0/install-dashboard.ps1'; $path=Join-Path $env:TEMP 'system8-dashboard-install.ps1'; Invoke-WebRequest -UseBasicParsing $url -OutFile $path; if((Get-FileHash $path -Algorithm SHA256).Hash.ToLowerInvariant() -ne 'e2719096d0cc3d5491622eb7adf9a855dcfdbd282e5ef490c50065c9884765a2'){Remove-Item $path -Force; throw 'SHA256 mismatch; operation stopped.'}; & $path
-```
-
-The versioned installer downloads the self-contained x64 dashboard archive, validates its published SHA-256 checksum, stages and validates the replacement before switching, installs it under `%LOCALAPPDATA%\System8\dashboard`, adds a Start menu shortcut, and opens it. The same archive installs System 8's pinned portable PowerShell 7.6.4 and Microsoft Graph 2.38.1 modules under `%LOCALAPPDATA%\System8\Toolchain`. Tool runs reset `PSModulePath` inside that private runtime, so Graph modules from the Windows profile or machine are not loaded. The installer does not request UAC, change machine PATH, or write outside the current user profile.
-
-Operator packages are shipped in one immutable `System8Packages-1.0.0.zip` release asset. The dashboard carries that archive and the stable manifest locally, verifies its exact SHA-256 before every install, and never downloads executable package content from the mutable `main` branch. Existing administrators can also install the dashboard through `s8 install dashboard`; the package-manager adapter is checksum-locked to the release installer archive.
-
-Preview the install without changing anything:
-
-```powershell
-$url='https://github.com/enkayz/system8/releases/download/dashboard-v1.0.0/install-dashboard.ps1'; $path=Join-Path $env:TEMP 'system8-dashboard-install.ps1'; Invoke-WebRequest -UseBasicParsing $url -OutFile $path; if((Get-FileHash $path -Algorithm SHA256).Hash.ToLowerInvariant() -ne 'e2719096d0cc3d5491622eb7adf9a855dcfdbd282e5ef490c50065c9884765a2'){Remove-Item $path -Force; throw 'SHA256 mismatch; operation stopped.'}; & $path -WhatIf
-```
-
-Remove the app from the current user profile:
-
-```powershell
-$url='https://github.com/enkayz/system8/releases/download/dashboard-v1.0.0/install-dashboard.ps1'; $path=Join-Path $env:TEMP 'system8-dashboard-install.ps1'; Invoke-WebRequest -UseBasicParsing $url -OutFile $path; if((Get-FileHash $path -Algorithm SHA256).Hash.ToLowerInvariant() -ne 'e2719096d0cc3d5491622eb7adf9a855dcfdbd282e5ef490c50065c9884765a2'){Remove-Item $path -Force; throw 'SHA256 mismatch; operation stopped.'}; & $path -Uninstall
-```
-
-Installed operator command-line tools share the private runtime, so the toolchain is retained by default. Remove both the dashboard and toolchain only when those commands are no longer needed:
-
-```powershell
-$url='https://github.com/enkayz/system8/releases/download/dashboard-v1.0.0/install-dashboard.ps1'; $path=Join-Path $env:TEMP 'system8-dashboard-install.ps1'; Invoke-WebRequest -UseBasicParsing $url -OutFile $path; if((Get-FileHash $path -Algorithm SHA256).Hash.ToLowerInvariant() -ne 'e2719096d0cc3d5491622eb7adf9a855dcfdbd282e5ef490c50065c9884765a2'){Remove-Item $path -Force; throw 'SHA256 mismatch; operation stopped.'}; & $path -Uninstall -RemoveToolchain
-```
+The source command maps are corrected in this tree. A replacement Windows artifact must be rebuilt and must pass dashboard core tests, dynamic per-user package installation, launcher-parity checks, immutable bundle verification, and Windows release verification before installation instructions are restored. Until then, use the reviewed `s8` package-manager path or the static web catalogue.
 
 ## Access behavior
 
@@ -62,4 +38,4 @@ dotnet publish .\System8Dashboard\System8Dashboard.csproj -c Release -p:Platform
 
 `toolchain.lock.json` pins every upstream URL and SHA-256 hash. The builder downloads archives directly instead of trusting `Install-Module`, PowerShellGet, or a pre-existing module installation. `verify-release.ps1` validates the dashboard archive, its checksum, the operator bundle, every stable manifest entry, the package-manager adapter and the bundled private toolchain before publication; add `-Published` after the GitHub release is live.
 
-The project targets WinUI 3 on .NET 10. The supported public release is the non-admin, self-contained ZIP used by the PowerShell installer. A self-signed MSIX is retained as build/signature evidence only: Windows does not accept its current-user certificate as a public non-admin trust path, and it is not published as a supported installer until a managed publisher pipeline can bootstrap the same private toolchain.
+The project targets WinUI 3 on .NET 10. No dashboard binary is currently a supported public install. A self-signed MSIX is retained as build/signature evidence only: Windows does not accept its current-user certificate as a public non-admin trust path, and it is not published as a supported installer until a managed publisher pipeline can bootstrap the same private toolchain.

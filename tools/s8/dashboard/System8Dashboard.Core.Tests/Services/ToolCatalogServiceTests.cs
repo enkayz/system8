@@ -26,6 +26,7 @@ public sealed class ToolCatalogServiceTests
 
         Assert.IsFalse(beforeInstall.Single().IsInstalled);
         Assert.IsTrue(afterInstall.Single().IsInstalled);
+        Assert.AreEqual("s8baseline", afterInstall.Single().Command);
         Assert.IsNotNull(afterInstall.Single().ScriptPath);
         StringAssert.Contains(afterInstall.Single().ScriptPath!, installedRoot);
 
