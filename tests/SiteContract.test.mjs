@@ -107,20 +107,24 @@ test("machine and per-user command maps use the same current launchers", async (
   }
 });
 
-test("government examples are evidence-led and explicitly non-production", async () => {
-  const [app, migration, tls, dlp, sample] = await Promise.all([
+test("land-asset migration features are generic, portable and evidence-led", async () => {
+  const [app, readme, migration, tls, dlp, sample, featureJson, keywords] = await Promise.all([
     read("src/App.tsx"),
-    read("docs/examples/government/dplh-lasp-migration.md"),
+    read("README.md"),
+    read("docs/examples/government/land-asset-sales-migration.md"),
     read("docs/examples/government/tls-management.md"),
     read("docs/examples/government/dlp-management.md"),
-    read("docs/examples/government/dplh-lasp-migration-input.csv"),
+    read("docs/examples/government/land-asset-source-inventory.csv"),
+    read("docs/examples/government/land-asset-features.json"),
+    read("docs/examples/government/github-discovery-keywords.md"),
   ]);
-  assert.match(app, /DPLH LASP migration/i);
-  assert.match(app, /TLS management/i);
-  assert.match(app, /DLP management/i);
+  const published = app + readme + migration + tls + dlp + sample + featureJson + keywords;
+  assert.doesNotMatch(published, /\bDPLH\b/i);
+  assert.doesNotMatch(published, /functional synthesis/i);
+  assert.match(app, /Land asset sales migration/i);
+  assert.match(app, /Australian GIS interoperability/i);
+  assert.match(app, /Legacy automation migration/i);
   assert.doesNotMatch(app, /github\.com\/enkayz\/system8\/blob\/main\/docs\/examples\/government/);
-  const immutableExampleLinks = [...app.matchAll(/https:\/\/github\.com\/enkayz\/system8\/blob\/[0-9a-f]{40}\/docs\/examples\/government\/(?:dplh-lasp-migration|tls-management|dlp-management)\.md/g)];
-  assert.equal(immutableExampleLinks.length, 3);
   for (const guide of [migration, tls, dlp]) {
     assert.match(guide, /EXAMPLE — NOT PRODUCTION INSTRUCTIONS/);
     assert.match(guide, /approval/i);
@@ -128,10 +132,20 @@ test("government examples are evidence-led and explicitly non-production", async
     assert.match(guide, /evidence/i);
   }
   assert.match(migration, /s8migrate estimate/);
-  assert.match(sample, /LASP legacy document library/);
+  assert.match(sample, /Public land asset register/);
+  assert.match(migration, /Power Pages/i);
+  assert.match(migration, /portable/i);
+  assert.match(migration, /VBA/i);
+  assert.match(migration, /Office Scripts/i);
+  assert.match(migration, /manual rewrite/i);
   assert.match(tls, /TLS 1\.2/);
-  assert.match(tls, /certificate/i);
   assert.match(dlp, /simulation/i);
-  assert.match(dlp, /Purview/i);
-  assert.doesNotMatch(migration + tls + dlp + sample, /real production data/i);
+  const features = JSON.parse(featureJson);
+  assert.ok(features.features.length >= 8);
+  for (const id of ["public-asset-catalogue", "australian-gis-adapters", "temporal-map-history", "portable-data-model", "legacy-automation-inventory", "tls-edge-baseline", "information-protection"]) {
+    assert.ok(features.features.some((feature) => feature.id === id), `missing feature ${id}`);
+  }
+  for (const term of ["Landgate", "SLIP", "NationalMap", "data.gov.au", "MapLibre", "OpenLayers", "TerriaJS", "PostGIS", "GeoServer", "STAC", "OGC API - Features", "NOAA", "Soar.Earth"]) {
+    assert.match(keywords, new RegExp(term.replaceAll(".", "\\."), "i"));
+  }
 });

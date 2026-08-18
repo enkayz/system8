@@ -113,22 +113,37 @@ function App() {
         </section>
 
         <section className="examples" id="examples" aria-labelledby="examples-title">
-          <div className="section-heading"><div><span className="section-index">03</span><h2 id="examples-title">Government operating examples</h2></div><p>Synthetic, approval-gated patterns for planning and assurance—not production runbooks.</p></div>
+          <div className="section-heading"><div><span className="section-index">03</span><h2 id="examples-title">Land asset sales migration features</h2></div><p>A portable public catalogue, Australian spatial-data adapters and controlled legacy migration—not a buyer-specific design.</p></div>
           <div className="example-grid">
             <article className="example-card">
-              <span>Migration planning</span><h3>DPLH LASP migration</h3>
-              <p>Model a provisional legacy workload inventory, preserve assumptions, and gate discovery, rehearsal, pilot, cutover and rollback with evidence.</p>
-              <a href="https://github.com/enkayz/system8/blob/81aaf05f3c7326ad5b51681b5bd5383653dc48db/docs/examples/government/dplh-lasp-migration.md" target="_blank" rel="noreferrer">Open example ↗</a>
+              <span>Public service</span><h3>Land asset sales migration</h3>
+              <p>Build a searchable map-and-list catalogue with stable asset records, status history, documents, subscriptions and accessible non-map journeys.</p>
+              <a href="https://github.com/enkayz/system8/blob/0a7761cfc6b0fb448221c6edb7eeacbcd708d0e4/docs/examples/government/land-asset-sales-migration.md" target="_blank" rel="noreferrer">Open feature pack ↗</a>
             </article>
             <article className="example-card">
-              <span>Infrastructure assurance</span><h3>TLS management</h3>
-              <p>Baseline certificates, cipher support, Schannel evidence and application dependencies before an approved, bounded compatibility change.</p>
-              <a href="https://github.com/enkayz/system8/blob/81aaf05f3c7326ad5b51681b5bd5383653dc48db/docs/examples/government/tls-management.md" target="_blank" rel="noreferrer">Open example ↗</a>
+              <span>Spatial data</span><h3>Australian GIS interoperability</h3>
+              <p>Keep Landgate/SLIP, NationalMap, data.gov.au, OGC, ArcGIS REST and open-format integrations at a replaceable adapter boundary.</p>
+              <a href="https://github.com/enkayz/system8/blob/0a7761cfc6b0fb448221c6edb7eeacbcd708d0e4/docs/examples/government/github-discovery-keywords.md" target="_blank" rel="noreferrer">Explore libraries and keywords ↗</a>
             </article>
             <article className="example-card">
-              <span>Information protection</span><h3>DLP management</h3>
-              <p>Take a Microsoft Purview DLP control from evidence and policy design through simulation, tuning, staged enforcement and rollback.</p>
-              <a href="https://github.com/enkayz/system8/blob/81aaf05f3c7326ad5b51681b5bd5383653dc48db/docs/examples/government/dlp-management.md" target="_blank" rel="noreferrer">Open example ↗</a>
+              <span>Platform exit</span><h3>Portable core and exports</h3>
+              <p>Use stable IDs, canonical schemas, OpenAPI and complete GeoJSON/CSV/JSON exports so Power Pages or any presentation layer remains replaceable.</p>
+              <a href="https://github.com/enkayz/system8/blob/0a7761cfc6b0fb448221c6edb7eeacbcd708d0e4/docs/examples/government/land-asset-features.json" target="_blank" rel="noreferrer">Inspect feature registry ↗</a>
+            </article>
+            <article className="example-card">
+              <span>Map history</span><h3>Temporal maps and provenance</h3>
+              <p>Expose dated imagery, geometry, asset status and transaction milestones through time sliders, comparison views and source provenance.</p>
+              <a href="https://github.com/enkayz/system8/blob/0a7761cfc6b0fb448221c6edb7eeacbcd708d0e4/docs/examples/government/land-asset-sales-migration.md#3-time-enabled-map-and-decision-history" target="_blank" rel="noreferrer">Review temporal features ↗</a>
+            </article>
+            <article className="example-card">
+              <span>Modernisation</span><h3>Legacy automation migration</h3>
+              <p>Inventory Office VBA separately from IIS/.NET, then route each automation to Office Scripts, services, retirement or evidence-backed manual rewrite.</p>
+              <a href="https://github.com/enkayz/system8/blob/0a7761cfc6b0fb448221c6edb7eeacbcd708d0e4/docs/examples/government/land-asset-sales-migration.md#5-legacy-estate-and-automation-inventory" target="_blank" rel="noreferrer">Open migration controls ↗</a>
+            </article>
+            <article className="example-card">
+              <span>Public assurance</span><h3>TLS, privacy and DLP</h3>
+              <p>Baseline the public edge, separate publishable and restricted fields, and simulate information-protection policy before enforcement.</p>
+              <a href="https://github.com/enkayz/system8/blob/0a7761cfc6b0fb448221c6edb7eeacbcd708d0e4/docs/examples/government/tls-management.md" target="_blank" rel="noreferrer">Open assurance example ↗</a>
             </article>
           </div>
         </section>
