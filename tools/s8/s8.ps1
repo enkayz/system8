@@ -15,15 +15,22 @@ $Root=Join-Path $env:ProgramData 'System8\Packages'
 $State=Join-Path $Root 'state.json'
 $Cache=Join-Path $Root 'cache'
 $Backups=Join-Path $Root 'backups'
-$StableManifest='https://raw.githubusercontent.com/enkayz/system8/dashboard-v1.0.0/tools/s8/manifests/stable.json'
+$StableManifest='https://raw.githubusercontent.com/enkayz/system8/120a14e61a86a693545f1709e35cafd483b2e175/tools/s8/manifests/stable.json'
+$StableManifestSha256='6fc931ec2802b39111f8261553f708ec6b5b84fdc33ce95364b58cbadfd1bbc6'
 $DevelopmentBase='https://raw.githubusercontent.com/enkayz/system8/main/tools/s8'
 @($Root,$Cache,$Backups)|ForEach-Object{New-Item -ItemType Directory -Path $_ -Force|Out-Null}
 function Get-State{if(Test-Path $State){Get-Content $State -Raw|ConvertFrom-Json}else{[pscustomobject]@{channel='stable';packages=[pscustomobject]@{}}}}
 function Save-State($s){$s|ConvertTo-Json -Depth 12|Set-Content $State -Encoding UTF8}
 function Get-Manifest{
  param([string]$c)
- $u=if($c -eq 'stable'){$StableManifest}else{"$DevelopmentBase/manifests/$c.json"}
- Invoke-RestMethod -UseBasicParsing -Uri $u
+ if($c -ne 'stable'){return Invoke-RestMethod -UseBasicParsing -Uri "$DevelopmentBase/manifests/$c.json"}
+ $manifestFile=Join-Path $env:TEMP ('s8-stable-manifest-'+[guid]::NewGuid().ToString('N')+'.json')
+ try{
+  Invoke-WebRequest -UseBasicParsing -Uri $StableManifest -OutFile $manifestFile
+  $actual=(Get-FileHash $manifestFile -Algorithm SHA256).Hash.ToLowerInvariant()
+  if($actual -ne $StableManifestSha256){throw 'Stable manifest SHA256 mismatch; package operation stopped.'}
+  Get-Content $manifestFile -Raw|ConvertFrom-Json
+ }finally{Remove-Item $manifestFile -Force -ErrorAction SilentlyContinue}
 }
 function Get-PackageDef{param($m,[string]$n)$p=@($m.packages|Where-Object name -eq $n);if(-not $p){throw "Unknown package: $n"};$p[0]}
 function Ensure-Admin{
@@ -39,6 +46,7 @@ function Download-Verified{param($def)
  $zip
 }
 function Install-Package{param([string]$n,[string]$c,[switch]$reinstall)
+ if($c -eq 'stable' -and $n -eq 'admx'){throw 'The stable ADMX package is temporarily unavailable pending an immutable verified release.'}
  Ensure-Admin;$m=Get-Manifest $c;$d=Get-PackageDef $m $n;$s=Get-State;$existing=$s.packages.PSObject.Properties[$n]
  if($existing -and -not $reinstall -and $existing.Value.version -eq $d.version){Write-Host "$n $($d.version) already installed.";return}
  if($existing){Backup-Package $n}
