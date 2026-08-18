@@ -15,8 +15,8 @@ $Root=Join-Path $env:ProgramData 'System8\Packages'
 $State=Join-Path $Root 'state.json'
 $Cache=Join-Path $Root 'cache'
 $Backups=Join-Path $Root 'backups'
-$StableManifest='https://raw.githubusercontent.com/enkayz/system8/120a14e61a86a693545f1709e35cafd483b2e175/tools/s8/manifests/stable.json'
-$StableManifestSha256='6fc931ec2802b39111f8261553f708ec6b5b84fdc33ce95364b58cbadfd1bbc6'
+$StableManifest='https://raw.githubusercontent.com/enkayz/system8/14bad625949341bbf335e3a199a1077c201c0f74/tools/s8/manifests/stable.json'
+$StableManifestSha256='846185e8dc9ad5c618016bec340a6459c33e8a879569c4131c17c8d15f1f4376'
 $DevelopmentBase='https://raw.githubusercontent.com/enkayz/system8/main/tools/s8'
 @($Root,$Cache,$Backups)|ForEach-Object{New-Item -ItemType Directory -Path $_ -Force|Out-Null}
 function Get-State{if(Test-Path $State){Get-Content $State -Raw|ConvertFrom-Json}else{[pscustomobject]@{channel='stable';packages=[pscustomobject]@{}}}}
@@ -46,7 +46,6 @@ function Download-Verified{param($def)
  $zip
 }
 function Install-Package{param([string]$n,[string]$c,[switch]$reinstall)
- if($c -eq 'stable' -and $n -eq 'admx'){throw 'The stable ADMX package is temporarily unavailable pending an immutable verified release.'}
  Ensure-Admin;$m=Get-Manifest $c;$d=Get-PackageDef $m $n;$s=Get-State;$existing=$s.packages.PSObject.Properties[$n]
  if($existing -and -not $reinstall -and $existing.Value.version -eq $d.version){Write-Host "$n $($d.version) already installed.";return}
  if($existing){Backup-Package $n}
