@@ -118,6 +118,9 @@ test("government examples are evidence-led and explicitly non-production", async
   assert.match(app, /DPLH LASP migration/i);
   assert.match(app, /TLS management/i);
   assert.match(app, /DLP management/i);
+  assert.doesNotMatch(app, /github\.com\/enkayz\/system8\/blob\/main\/docs\/examples\/government/);
+  const immutableExampleLinks = [...app.matchAll(/https:\/\/github\.com\/enkayz\/system8\/blob\/[0-9a-f]{40}\/docs\/examples\/government\/(?:dplh-lasp-migration|tls-management|dlp-management)\.md/g)];
+  assert.equal(immutableExampleLinks.length, 3);
   for (const guide of [migration, tls, dlp]) {
     assert.match(guide, /EXAMPLE — NOT PRODUCTION INSTRUCTIONS/);
     assert.match(guide, /approval/i);
