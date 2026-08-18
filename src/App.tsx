@@ -8,7 +8,7 @@ type Tool = {
   mode: string;
 };
 
-const installer = "$url='https://raw.githubusercontent.com/enkayz/system8/56a8f9ddbd0789aa8c957a1bc09424c310e77d29/tools/s8/install.ps1'; $path=Join-Path $env:TEMP 'system8-install.ps1'; Invoke-WebRequest -UseBasicParsing $url -OutFile $path; if((Get-FileHash $path -Algorithm SHA256).Hash.ToLowerInvariant() -ne 'f331e7daec7cba05d26791823880016062e2c290c887d9a7a86e34361b9c9471'){Remove-Item $path -Force; throw 'SHA256 mismatch; installation stopped.'}; & $path";
+const installer = "$url='https://raw.githubusercontent.com/enkayz/system8/9c813a61cab07f31b536d72947d31a928cc9828a/tools/s8/install.ps1'; $path=Join-Path $env:TEMP 'system8-install.ps1'; Invoke-WebRequest -UseBasicParsing $url -OutFile $path; if((Get-FileHash $path -Algorithm SHA256).Hash.ToLowerInvariant() -ne '14b9026e4e18ff9601e5458e3e143aababf34b5c4c6f1f17ce7c635d0dec87d8'){Remove-Item $path -Force; throw 'SHA256 mismatch; installation stopped.'}; & $path -NoAdmx";
 
 const tools: Tool[] = [
   { name: "m365", command: "s8m365 full", category: "Governance", description: "Tenant, user, role, licence, labels and sharing inventory with evidence output.", mode: "Microsoft Graph · read-only" },

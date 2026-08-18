@@ -41,7 +41,8 @@ test("the site exposes source, installer and safety boundaries", async () => {
   assert.match(app, /SHA256 mismatch/);
   assert.doesNotMatch(bootstrap, /raw\.githubusercontent\.com\/enkayz\/system8\/main\//);
   assert.match(bootstrap, /Get-FileHash/);
-  assert.match(cli, /dashboard-v1\.0\.0\/tools\/s8\/manifests\/stable\.json/);
+  assert.match(cli, /120a14e61a86a693545f1709e35cafd483b2e175\/tools\/s8\/manifests\/stable\.json/);
+  assert.match(cli, /6fc931ec2802b39111f8261553f708ec6b5b84fdc33ce95364b58cbadfd1bbc6/);
   assert.match(app, /Read-only by design/);
   assert.match(app, /No tenant credentials/);
 });
@@ -55,4 +56,20 @@ test("every catalogue command is provided by its package launcher", async () => 
     const executable = command.split(/\s+/)[0];
     assert.match(installer, new RegExp(`${executable}\\.cmd`, "i"), `${packageName} does not install ${executable}`);
   }
+});
+
+test("published installation guidance has no mutable admin execution path", async () => {
+  const [readme, bootstrap, cli] = await Promise.all([
+    read("README.md"),
+    read("tools/s8/install.ps1"),
+    read("tools/s8/s8.ps1"),
+  ]);
+  assert.doesNotMatch(readme, /raw\.githubusercontent\.com\/enkayz\/system8\/main\//);
+  assert.doesNotMatch(readme, /ScriptBlock\]::Create\(\(irm/i);
+  assert.doesNotMatch(readme, /s8tenantdiff|s8secure/);
+  assert.match(readme, /s8diff/);
+  assert.match(readme, /s8baseline/);
+  assert.doesNotMatch(bootstrap, /&\s*\$cli\s+install\s+admx/i);
+  assert.match(cli, /120a14e61a86a693545f1709e35cafd483b2e175\/tools\/s8\/manifests\/stable\.json/);
+  assert.match(cli, /6fc931ec2802b39111f8261553f708ec6b5b84fdc33ce95364b58cbadfd1bbc6/);
 });

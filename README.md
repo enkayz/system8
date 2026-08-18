@@ -50,10 +50,10 @@ The repository includes a PowerShell 5.1/7-compatible package manager for System
 ### One-line install
 
 ```powershell
-irm https://raw.githubusercontent.com/enkayz/system8/main/tools/s8/install.ps1 | iex
+$url='https://raw.githubusercontent.com/enkayz/system8/9c813a61cab07f31b536d72947d31a928cc9828a/tools/s8/install.ps1'; $path=Join-Path $env:TEMP 'system8-install.ps1'; Invoke-WebRequest -UseBasicParsing $url -OutFile $path; if((Get-FileHash $path -Algorithm SHA256).Hash.ToLowerInvariant() -ne '14b9026e4e18ff9601e5458e3e143aababf34b5c4c6f1f17ce7c635d0dec87d8'){Remove-Item $path -Force; throw 'SHA256 mismatch; installation stopped.'}; & $path -NoAdmx
 ```
 
-The bootstrap self-elevates, installs `s8`, adds it to the machine `PATH`, and installs the ADMX Manager by default.
+The bootstrap is pinned to an immutable commit and verified before it self-elevates, installs `s8`, and adds it to the machine `PATH`. The installed CLI independently verifies its pinned payload and stable manifest. Automatic ADMX installation is disabled until an immutable verified ADMX package is released.
 
 ```powershell
 s8 list
@@ -65,18 +65,12 @@ s8 rollback m365
 s8 remove m365
 ```
 
-Install the package manager without installing ADMX Manager:
-
-```powershell
-& ([scriptblock]::Create((irm https://raw.githubusercontent.com/enkayz/system8/main/tools/s8/install.ps1))) -NoAdmx
-```
-
 ### Non-admin dashboard
 
 The self-contained System 8 Dashboard installs only for the current Windows user and does not require UAC, a machine-wide certificate, or PATH changes:
 
 ```powershell
-& ([scriptblock]::Create((irm https://github.com/enkayz/system8/releases/download/dashboard-v1.0.0/install-dashboard.ps1)))
+$url='https://github.com/enkayz/system8/releases/download/dashboard-v1.0.0/install-dashboard.ps1'; $path=Join-Path $env:TEMP 'system8-dashboard-install.ps1'; Invoke-WebRequest -UseBasicParsing $url -OutFile $path; if((Get-FileHash $path -Algorithm SHA256).Hash.ToLowerInvariant() -ne 'e2719096d0cc3d5491622eb7adf9a855dcfdbd282e5ef490c50065c9884765a2'){Remove-Item $path -Force; throw 'SHA256 mismatch; installation stopped.'}; & $path
 ```
 
 It discovers and installs operator packages under `%LOCALAPPDATA%\System8`, runs them with the user's existing access, and keeps denied collections as evidence. The installer supplies a checksum-locked portable PowerShell, private Microsoft Graph modules, and an immutable offline operator-package bundle; dashboard and command-line runs exclude profile and machine module paths. The access-request flow suggests the least-privilege role, checks eligible PIM roles when Microsoft Graph allows it, and falls back to a pre-filled administrator or service-desk email. PIM activation and email sending always remain user-confirmed actions.
@@ -130,9 +124,9 @@ The stable catalogue also contains focused tools for recurring discovery, assura
 |---|---|---|
 | `m365-governance` | `s8gov` | Entra, consent, Conditional Access, stale identity, Teams and SharePoint governance evidence |
 | `m365-license-optimizer` | `s8license` | SKU utilization, dormant or disabled licensed users and customer-priced savings candidates |
-| `m365-tenant-diff` | `s8tenantdiff` | Normalized point-in-time snapshots and offline added/removed/changed configuration reports |
+| `m365-tenant-diff` | `s8diff` | Normalized point-in-time snapshots and offline added/removed/changed configuration reports |
 | `m365-sharepoint-modernizer` | `s8spmodern` | Site and library inventory, stale/scale flags and an advisory modernization plan |
-| `m365-security-baseline` | `s8secure` | Conditional Access, privileged-role and enterprise-application baseline findings |
+| `m365-security-baseline` | `s8baseline` | Conditional Access, privileged-role and enterprise-application baseline findings |
 | `m365-migration-estimator` | `s8migrate` | Offline migration effort, elapsed-time, risk and optionally customer-priced cost estimates |
 | `m365-entitlement-advisor` | `s8entitlement` | Live service-plan entitlement compared with explicit persona and capability requirements |
 | `m365-change-impact` | `s8changes` | Service health and Message Center changes prioritized against tenant scale |
@@ -155,9 +149,9 @@ s8 install m365-leaver-readiness
 s8 install m365-recovery-readiness
 
 s8license full -InstallDependencies
-s8tenantdiff capture -InstallDependencies -OutputPath .\tenant-baseline
+s8diff capture -InstallDependencies -OutputPath .\tenant-baseline
 s8spmodern full -InstallDependencies
-s8secure full -InstallDependencies
+s8baseline full -InstallDependencies
 s8migrate template -OutputPath .\migration-estimate
 s8entitlement template -OutputPath .\entitlement
 s8changes full -InstallDependencies
