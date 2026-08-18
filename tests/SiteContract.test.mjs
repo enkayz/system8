@@ -29,9 +29,30 @@ test("the Netlify frontend is static and does not require Convex", async () => {
 });
 
 test("the site exposes source, installer and safety boundaries", async () => {
-  const app = await read("src/App.tsx");
+  const [app, bootstrap, cli] = await Promise.all([
+    read("src/App.tsx"),
+    read("tools/s8/install.ps1"),
+    read("tools/s8/s8.ps1"),
+  ]);
   assert.match(app, /github\.com\/enkayz\/system8/);
-  assert.match(app, /raw\.githubusercontent\.com\/enkayz\/system8\/main\/tools\/s8\/install\.ps1/);
+  assert.doesNotMatch(app, /raw\.githubusercontent\.com\/enkayz\/system8\/main\//);
+  assert.doesNotMatch(app, /\|\s*iex/i);
+  assert.match(app, /Get-FileHash/);
+  assert.match(app, /SHA256 mismatch/);
+  assert.doesNotMatch(bootstrap, /raw\.githubusercontent\.com\/enkayz\/system8\/main\//);
+  assert.match(bootstrap, /Get-FileHash/);
+  assert.match(cli, /dashboard-v1\.0\.0\/tools\/s8\/manifests\/stable\.json/);
   assert.match(app, /Read-only by design/);
   assert.match(app, /No tenant credentials/);
+});
+
+test("every catalogue command is provided by its package launcher", async () => {
+  const app = await read("src/App.tsx");
+  const entries = [...app.matchAll(/name: "([^"]+)", command: "([^"]+)"/g)];
+  assert.equal(entries.length, 13);
+  for (const [, packageName, command] of entries) {
+    const installer = await read(`tools/s8/packages/${packageName}/install.ps1`);
+    const executable = command.split(/\s+/)[0];
+    assert.match(installer, new RegExp(`${executable}\\.cmd`, "i"), `${packageName} does not install ${executable}`);
+  }
 });

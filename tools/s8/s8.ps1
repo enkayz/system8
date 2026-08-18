@@ -15,11 +15,16 @@ $Root=Join-Path $env:ProgramData 'System8\Packages'
 $State=Join-Path $Root 'state.json'
 $Cache=Join-Path $Root 'cache'
 $Backups=Join-Path $Root 'backups'
-$Base='https://raw.githubusercontent.com/enkayz/system8/main/tools/s8'
+$StableManifest='https://raw.githubusercontent.com/enkayz/system8/dashboard-v1.0.0/tools/s8/manifests/stable.json'
+$DevelopmentBase='https://raw.githubusercontent.com/enkayz/system8/main/tools/s8'
 @($Root,$Cache,$Backups)|ForEach-Object{New-Item -ItemType Directory -Path $_ -Force|Out-Null}
 function Get-State{if(Test-Path $State){Get-Content $State -Raw|ConvertFrom-Json}else{[pscustomobject]@{channel='stable';packages=[pscustomobject]@{}}}}
 function Save-State($s){$s|ConvertTo-Json -Depth 12|Set-Content $State -Encoding UTF8}
-function Get-Manifest{param([string]$c)$u="$Base/manifests/$c.json";Invoke-RestMethod -UseBasicParsing -Uri $u}
+function Get-Manifest{
+ param([string]$c)
+ $u=if($c -eq 'stable'){$StableManifest}else{"$DevelopmentBase/manifests/$c.json"}
+ Invoke-RestMethod -UseBasicParsing -Uri $u
+}
 function Get-PackageDef{param($m,[string]$n)$p=@($m.packages|Where-Object name -eq $n);if(-not $p){throw "Unknown package: $n"};$p[0]}
 function Ensure-Admin{
  $id=[Security.Principal.WindowsIdentity]::GetCurrent();$p=[Security.Principal.WindowsPrincipal]::new($id)
