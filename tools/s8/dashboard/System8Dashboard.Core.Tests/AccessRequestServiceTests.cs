@@ -12,7 +12,7 @@ public sealed class AccessRequestServiceTests
         string directory = Path.Combine(Path.GetTempPath(), $"system8-tests-{Guid.NewGuid():N}");
         try
         {
-            ToolDefinition tool = new("m365-security-baseline", "s8secure", "Security", null, false);
+            ToolDefinition tool = new("m365-security-baseline", "s8baseline", "Security", null, false);
             ToolRunResult run = new(1, string.Empty, string.Empty, directory,
                 [new CollectionEvidence("Conditional Access policies", "Failed", 0, "403 Authorization_RequestDenied")]);
 

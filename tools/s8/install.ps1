@@ -16,9 +16,12 @@ if(-not $principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrat
 }
 $bin=Join-Path $env:ProgramFiles 'System8\bin'
 New-Item -ItemType Directory -Path $bin -Force|Out-Null
-$cliUrl='https://raw.githubusercontent.com/enkayz/system8/main/tools/s8/s8.ps1'
+$cliUrl='https://raw.githubusercontent.com/enkayz/system8/bf24d09ef4f7cf6adc66838872ee53d229112596/tools/s8/s8.ps1'
+$cliSha256='7aaa39d683080de1fbae7a946389793fcef8edbb19c62137c6b700772b75a337'
 $cli=Join-Path $bin 's8.ps1'
 Invoke-WebRequest -UseBasicParsing -Uri $cliUrl -OutFile $cli
+$actualCliHash=(Get-FileHash $cli -Algorithm SHA256).Hash.ToLowerInvariant()
+if($actualCliHash -ne $cliSha256){Remove-Item $cli -Force;throw 'System 8 CLI SHA256 mismatch; installation stopped.'}
 $cmd=Join-Path $bin 's8.cmd'
 @'
 @echo off
@@ -34,4 +37,4 @@ if(($machine -split ';') -notcontains $bin){[Environment]::SetEnvironmentVariabl
 $env:Path="$env:Path;$bin"
 Write-Host "Installed System 8 Package Manager to $bin" -ForegroundColor Green
 Write-Host 'Command available: s8' -ForegroundColor Green
-if(-not $NoAdmx){& $cli install admx -Channel $Channel}
+if(-not $NoAdmx){Write-Warning 'Automatic ADMX installation is disabled pending an immutable verified ADMX release.'}

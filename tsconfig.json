@@ -5,17 +5,17 @@
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     "allowJs": false,
     "skipLibCheck": true,
-    "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "module": "ESNext",
-    "moduleResolution": "Node",
+    "moduleResolution": "Bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src", ".eslintrc.cjs"],
+  "include": ["src/main.tsx", "src/App.tsx", "src/vite-env.d.ts"],
+  "exclude": ["convex", "src/hooks", "src/Countdown.tsx", "src/CreateImage.tsx", "src/Game.tsx", "src/GameRound.tsx", "src/Generate.tsx", "src/GuessStage.tsx", "src/InputName.tsx", "src/JoinGame.tsx", "src/LabelStage.tsx", "src/Lobby.tsx", "src/Player.tsx", "src/ProfilePicker.tsx", "src/ProfilePicture.tsx", "src/Recap.tsx", "src/RevealStage.tsx", "src/Submissions.tsx", "src/Waiting.tsx"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

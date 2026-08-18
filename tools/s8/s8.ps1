@@ -15,11 +15,23 @@ $Root=Join-Path $env:ProgramData 'System8\Packages'
 $State=Join-Path $Root 'state.json'
 $Cache=Join-Path $Root 'cache'
 $Backups=Join-Path $Root 'backups'
-$Base='https://raw.githubusercontent.com/enkayz/system8/main/tools/s8'
+$StableManifest='https://raw.githubusercontent.com/enkayz/system8/60cf03810bcc00656fc6f78a0fbb87100a3fa5e4/tools/s8/manifests/stable.json'
+$StableManifestSha256='c626f35e460f79d334df18133d2465c0227acb25d87023bba1f3b8d5b00d2b87'
+$DevelopmentBase='https://raw.githubusercontent.com/enkayz/system8/main/tools/s8'
 @($Root,$Cache,$Backups)|ForEach-Object{New-Item -ItemType Directory -Path $_ -Force|Out-Null}
 function Get-State{if(Test-Path $State){Get-Content $State -Raw|ConvertFrom-Json}else{[pscustomobject]@{channel='stable';packages=[pscustomobject]@{}}}}
 function Save-State($s){$s|ConvertTo-Json -Depth 12|Set-Content $State -Encoding UTF8}
-function Get-Manifest{param([string]$c)$u="$Base/manifests/$c.json";Invoke-RestMethod -UseBasicParsing -Uri $u}
+function Get-Manifest{
+ param([string]$c)
+ if($c -ne 'stable'){return Invoke-RestMethod -UseBasicParsing -Uri "$DevelopmentBase/manifests/$c.json"}
+ $manifestFile=Join-Path $env:TEMP ('s8-stable-manifest-'+[guid]::NewGuid().ToString('N')+'.json')
+ try{
+  Invoke-WebRequest -UseBasicParsing -Uri $StableManifest -OutFile $manifestFile
+  $actual=(Get-FileHash $manifestFile -Algorithm SHA256).Hash.ToLowerInvariant()
+  if($actual -ne $StableManifestSha256){throw 'Stable manifest SHA256 mismatch; package operation stopped.'}
+  Get-Content $manifestFile -Raw|ConvertFrom-Json
+ }finally{Remove-Item $manifestFile -Force -ErrorAction SilentlyContinue}
+}
 function Get-PackageDef{param($m,[string]$n)$p=@($m.packages|Where-Object name -eq $n);if(-not $p){throw "Unknown package: $n"};$p[0]}
 function Ensure-Admin{
  $id=[Security.Principal.WindowsIdentity]::GetCurrent();$p=[Security.Principal.WindowsPrincipal]::new($id)

@@ -10,8 +10,8 @@ public sealed class ToolCatalogService
     private static readonly Dictionary<string, string> CommandMap = new(StringComparer.OrdinalIgnoreCase)
     {
         ["m365"] = "s8m365", ["m365-governance"] = "s8gov", ["m365-license-optimizer"] = "s8license",
-        ["m365-tenant-diff"] = "s8tenantdiff", ["m365-sharepoint-modernizer"] = "s8spmodern",
-        ["m365-security-baseline"] = "s8secure", ["m365-migration-estimator"] = "s8migrate",
+        ["m365-tenant-diff"] = "s8diff", ["m365-sharepoint-modernizer"] = "s8spmodern",
+        ["m365-security-baseline"] = "s8baseline", ["m365-migration-estimator"] = "s8migrate",
         ["m365-entitlement-advisor"] = "s8entitlement", ["m365-change-impact"] = "s8changes",
         ["m365-copilot-readiness"] = "s8copilot", ["m365-access-explainer"] = "s8access",
         ["m365-leaver-readiness"] = "s8leaver", ["m365-recovery-readiness"] = "s8resilience",
