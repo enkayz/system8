@@ -4,8 +4,8 @@ Evidence-led, read-only checks for Conditional Access, privileged roles, applica
 
 ```powershell
 s8 install m365-security-baseline
-s8secure full -InstallDependencies
-s8secure access
+s8baseline full -InstallDependencies
+s8baseline access
 ```
 
 Findings are advisory and mapped to explicit collected evidence. No remediation is performed.

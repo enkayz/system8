@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { readFile, readdir } from "node:fs/promises";
 import test from "node:test";
 
 const root = new URL("../", import.meta.url);
@@ -59,15 +59,20 @@ test("every catalogue command is provided by its package launcher", async () => 
 });
 
 test("published installation guidance has no mutable admin execution path", async () => {
+  const packageEntries = await readdir(new URL("../tools/s8/packages/", import.meta.url), { withFileTypes: true });
+  const packageReadmes = await Promise.all(packageEntries.filter((entry) => entry.isDirectory()).map(async (entry) => {
+    try { return await read(`tools/s8/packages/${entry.name}/README.md`); } catch { return ""; }
+  }));
   const [readme, dashboardReadme, bootstrap, cli] = await Promise.all([
     read("README.md"),
     read("tools/s8/dashboard/README.md"),
     read("tools/s8/install.ps1"),
     read("tools/s8/s8.ps1"),
   ]);
-  const publishedGuidance = readme + dashboardReadme;
+  const publishedGuidance = readme + dashboardReadme + packageReadmes.join("\n");
   assert.doesNotMatch(publishedGuidance, /raw\.githubusercontent\.com\/enkayz\/system8\/main\//);
   assert.doesNotMatch(publishedGuidance, /ScriptBlock\]::Create\(\(irm/i);
+  assert.doesNotMatch(publishedGuidance, /s8tenantdiff|s8secure/);
   assert.match(dashboardReadme, /e2719096d0cc3d5491622eb7adf9a855dcfdbd282e5ef490c50065c9884765a2/);
   assert.doesNotMatch(readme, /s8tenantdiff|s8secure/);
   assert.match(readme, /s8diff/);
