@@ -2,7 +2,7 @@
 
 > **EXAMPLE — NOT PRODUCTION INSTRUCTIONS**
 >
-> This example describes a Microsoft Purview Data Loss Prevention (DLP) management pattern for a government tenant. It does not define DPLH policy, legal obligations, information classifications or an approved control configuration. Policy creation, enforcement and deletion require tenant-owner, records, privacy, cyber and change approval.
+> This example describes a Microsoft Purview Data Loss Prevention (DLP) management pattern for a government tenant. It does not define any agency's policy, legal obligations, information classifications or approved control configuration. Policy creation, enforcement and deletion require tenant-owner, records, privacy, cyber and change approval.
 
 ## Outcome
 
@@ -10,7 +10,7 @@ Move from an evidenced information-risk scenario to a simulated, measured and ap
 
 ## Example scenario
 
-A LASP-style land-asset workflow may contain personal information, commercial negotiations, culturally or environmentally sensitive material, legal advice and cross-agency documents. Before configuring DLP, confirm:
+A public land-asset workflow may contain personal information, commercial negotiations, culturally or environmentally sensitive material, legal advice and cross-agency documents. Before configuring DLP, confirm:
 
 - authoritative classification and handling rules;
 - in-scope users, agencies, guests, sites, teams, devices and endpoints;
@@ -44,7 +44,7 @@ Record authentication identity, delegated role, timestamp, tenant ID, collection
 
 | Field | Example planning entry |
 |---|---|
-| Risk statement | Unapproved disclosure of classified LASP working documents to external recipients. |
+| Risk statement | Unapproved disclosure of restricted land-asset working documents to external recipients. |
 | Locations | Named SharePoint/Teams pilot locations only; tenant-wide scope requires separate approval. |
 | Detection | Approved sensitivity labels and validated sensitive-information types. |
 | Initial mode | Simulation with policy tips disabled until false-positive review. |

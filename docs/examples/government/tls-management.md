@@ -2,7 +2,7 @@
 
 > **EXAMPLE — NOT PRODUCTION INSTRUCTIONS**
 >
-> This is an evidence-led operational pattern for a government web application such as a legacy LASP service. It does not establish the root cause of an outage and is not approval to change protocols, cipher suites, certificates, proxies, IIS, .NET or Windows policy.
+> This is an evidence-led operational pattern for a government public land-asset service. It does not establish the root cause of an outage and is not approval to change protocols, cipher suites, certificates, proxies, IIS, .NET or Windows policy.
 
 ## Outcome
 

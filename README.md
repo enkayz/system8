@@ -71,15 +71,16 @@ The previous `dashboard-v1.0.0` binary is withdrawn from supported installation 
 
 Source and current release status: [`tools/s8/dashboard`](tools/s8/dashboard)
 
-### Government operating examples
+### Public land asset sales migration features
 
-These synthetic examples show how the evidence-led approach can be adapted to bounded government work without presenting assumptions as production facts:
+The government-generic feature pack focuses on a portable public catalogue rather than one buyer or one platform:
 
-- [DPLH LASP migration planning](docs/examples/government/dplh-lasp-migration.md) — offline effort modelling, evidence gates, rehearsal, cutover and rollback.
-- [TLS management](docs/examples/government/tls-management.md) — certificate, cipher, Schannel and application-path baselining before approved change.
-- [DLP management](docs/examples/government/dlp-management.md) — Microsoft Purview discovery, simulation, tuning, staged enforcement and rollback.
+- [Land asset sales migration](docs/examples/government/land-asset-sales-migration.md) — catalogue, GIS, temporal history, portability, legacy automation, security and migration gates.
+- [Machine-readable feature registry](docs/examples/government/land-asset-features.json) — ten outcomes with explicit evidence requirements.
+- [GitHub and library discovery keywords](docs/examples/government/github-discovery-keywords.md) — Australian GIS, open standards, temporal maps, platform migration and security candidates.
+- [TLS management](docs/examples/government/tls-management.md) and [DLP management](docs/examples/government/dlp-management.md) — bounded public-edge and information-protection controls.
 
-The LASP CSV is synthetic and contains no DPLH production information: [`dplh-lasp-migration-input.csv`](docs/examples/government/dplh-lasp-migration-input.csv).
+The [synthetic source inventory](docs/examples/government/land-asset-source-inventory.csv) contains no production data and can be executed through the offline migration estimator.
 
 ## Current surface
 

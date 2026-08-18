@@ -1,6 +1,0 @@
-Workload,Name,Objects,SizeGB,Complexity,UnsupportedItems,PermissionSets,Users,Notes
-SharePoint,LASP legacy document library,48000,850,High,12,320,650,Synthetic placeholder for document and metadata migration rehearsal
-SharePoint,LASP workflow lists,180,35,Critical,18,140,420,Synthetic placeholder for custom workflow state and list schema assessment
-Database,LASP application data,420,190,Critical,8,95,180,Synthetic placeholder requiring record-level reconciliation and approved target mapping
-Integration,LASP GIS and property interfaces,14,12,High,6,40,90,Synthetic placeholder for interface replacement and balancing tests
-Files,LASP reporting exports,9500,120,Medium,3,55,240,Synthetic placeholder for report inventory retention and owner validation
