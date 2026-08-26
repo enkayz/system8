@@ -1,0 +1,8 @@
+Workload,Name,Objects,SizeGB,Complexity,UnsupportedItems,PermissionSets,Users,Notes
+Data,Public land asset register,18000,45,High,4,65,220,Synthetic catalogue records with stable IDs status and publishability fields
+Web,Public land asset pages,2400,18,Medium,6,18,150000,Synthetic public pages URLs attachments metadata and accessibility templates
+GIS,Parcel and planning layers,85,620,Critical,9,42,260,Synthetic vector raster temporal and coordinate-reference-system migration workload
+Documents,Sale and disposal documents,36000,780,High,12,140,480,Synthetic documents requiring classification metadata scanning retention and public release gates
+Automation,Office VBA and scheduled jobs,140,8,Critical,38,35,95,Synthetic macro workflow and batch inventory requiring conversion assessment or manual rewrite
+Integration,Land mapping and open-data adapters,28,35,High,7,24,130,Synthetic OGC ArcGIS REST catalogue geocoding and metadata interfaces
+Platform,Portal configuration and workflows,320,22,High,11,78,260,Synthetic Power Pages SharePoint or custom portal configuration requiring portable export and reconciliation

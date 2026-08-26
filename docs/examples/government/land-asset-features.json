@@ -1,0 +1,67 @@
+{
+  "schemaVersion": "1.0",
+  "title": "Portable public land asset sales migration features",
+  "status": "synthetic planning example",
+  "features": [
+    {
+      "id": "public-asset-catalogue",
+      "title": "Accessible public asset catalogue",
+      "outcome": "Map and list discovery with stable URLs, status, dates, documents, subscriptions and machine-readable records.",
+      "evidence": ["publishability decision", "accessibility test", "public API contract", "source attribution"]
+    },
+    {
+      "id": "australian-gis-adapters",
+      "title": "Australian GIS and open-data adapters",
+      "outcome": "Connect authorised Landgate/SLIP, NationalMap, data.gov.au, OGC and ArcGIS REST sources without baking one provider into the core model.",
+      "evidence": ["licence", "owner", "freshness", "CRS", "accuracy", "attribution"]
+    },
+    {
+      "id": "temporal-map-history",
+      "title": "Temporal map and asset history",
+      "outcome": "Explore dated imagery, geometry, status and transaction events without overwriting current state.",
+      "evidence": ["valid-from/to", "source timestamp", "event provenance", "snapshot checksum"]
+    },
+    {
+      "id": "portable-data-model",
+      "title": "Portable data and exit model",
+      "outcome": "Canonical schema, stable IDs, OpenAPI and complete GeoJSON/CSV/JSON exports keep presentation platforms replaceable.",
+      "evidence": ["schema", "full export", "round-trip import", "reconciliation report"]
+    },
+    {
+      "id": "legacy-automation-inventory",
+      "title": "Legacy automation migration",
+      "outcome": "Inventory Office VBA separately from IIS/.NET code and route each automation to Office Scripts, Power Automate, a service, retirement or manual rewrite.",
+      "evidence": ["dependency graph", "risk score", "test fixture", "output comparison", "manual review"]
+    },
+    {
+      "id": "tls-edge-baseline",
+      "title": "TLS and public edge baseline",
+      "outcome": "Diagnose certificates, trust, protocols, ciphers, proxies, IIS and application behaviour before bounded remediation.",
+      "evidence": ["certificate chain", "handshake", "Schannel/IIS logs", "approved rollback"]
+    },
+    {
+      "id": "information-protection",
+      "title": "Information protection and DLP",
+      "outcome": "Separate public and restricted fields and simulate DLP before staged enforcement.",
+      "evidence": ["classification", "simulation metrics", "false-positive review", "exception expiry"]
+    },
+    {
+      "id": "document-publication",
+      "title": "Safe document publication",
+      "outcome": "Scan, sanitise, classify and attribute downloadable documents while preserving records metadata and hashes.",
+      "evidence": ["malware scan", "metadata policy", "retention", "release approval"]
+    },
+    {
+      "id": "workflow-and-notifications",
+      "title": "Status workflow and notifications",
+      "outcome": "Publish approved asset milestones and notify subscribers without exposing internal workflow detail.",
+      "evidence": ["state transition", "owner", "public message", "audit event"]
+    },
+    {
+      "id": "migration-assurance",
+      "title": "Migration reconciliation and rollback",
+      "outcome": "Reconcile records, documents, geometry, permissions, status and history before cutover, with a tested return path.",
+      "evidence": ["counts", "hashes", "geometry checks", "exception queue", "acceptance", "rollback test"]
+    }
+  ]
+}

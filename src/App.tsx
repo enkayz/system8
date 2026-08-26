@@ -59,7 +59,7 @@ function App() {
       <header className="masthead">
         <a className="brand" href="#top" aria-label="System 8 home"><span className="brand-mark">8</span><span>System 8</span></a>
         <nav aria-label="Primary navigation">
-          <a href="#tools">Tools</a><a href="#harness">Harness</a><a href="#safety">Safety</a>
+          <a href="#tools">Tools</a><a href="#examples">Examples</a><a href="#harness">Harness</a><a href="#safety">Safety</a>
           <a href="https://github.com/enkayz/system8" target="_blank" rel="noreferrer">GitHub ↗</a>
         </nav>
       </header>
@@ -112,13 +112,49 @@ function App() {
           {filtered.length === 0 && <p className="empty">No tools match this filter.</p>}
         </section>
 
+        <section className="examples" id="examples" aria-labelledby="examples-title">
+          <div className="section-heading"><div><span className="section-index">03</span><h2 id="examples-title">Land asset sales migration features</h2></div><p>A portable public catalogue, Australian spatial-data adapters and controlled legacy migration—not a buyer-specific design.</p></div>
+          <div className="example-grid">
+            <article className="example-card">
+              <span>Public service</span><h3>Land asset sales migration</h3>
+              <p>Build a searchable map-and-list catalogue with stable asset records, status history, documents, subscriptions and accessible non-map journeys.</p>
+              <a href="https://github.com/enkayz/system8/blob/0a7761cfc6b0fb448221c6edb7eeacbcd708d0e4/docs/examples/government/land-asset-sales-migration.md" target="_blank" rel="noreferrer">Open feature pack ↗</a>
+            </article>
+            <article className="example-card">
+              <span>Spatial data</span><h3>Australian GIS interoperability</h3>
+              <p>Keep Landgate/SLIP, NationalMap, data.gov.au, OGC, ArcGIS REST and open-format integrations at a replaceable adapter boundary.</p>
+              <a href="https://github.com/enkayz/system8/blob/0a7761cfc6b0fb448221c6edb7eeacbcd708d0e4/docs/examples/government/github-discovery-keywords.md" target="_blank" rel="noreferrer">Explore libraries and keywords ↗</a>
+            </article>
+            <article className="example-card">
+              <span>Platform exit</span><h3>Portable core and exports</h3>
+              <p>Use stable IDs, canonical schemas, OpenAPI and complete GeoJSON/CSV/JSON exports so Power Pages or any presentation layer remains replaceable.</p>
+              <a href="https://github.com/enkayz/system8/blob/0a7761cfc6b0fb448221c6edb7eeacbcd708d0e4/docs/examples/government/land-asset-features.json" target="_blank" rel="noreferrer">Inspect feature registry ↗</a>
+            </article>
+            <article className="example-card">
+              <span>Map history</span><h3>Temporal maps and provenance</h3>
+              <p>Expose dated imagery, geometry, asset status and transaction milestones through time sliders, comparison views and source provenance.</p>
+              <a href="https://github.com/enkayz/system8/blob/0a7761cfc6b0fb448221c6edb7eeacbcd708d0e4/docs/examples/government/land-asset-sales-migration.md#3-time-enabled-map-and-decision-history" target="_blank" rel="noreferrer">Review temporal features ↗</a>
+            </article>
+            <article className="example-card">
+              <span>Modernisation</span><h3>Legacy automation migration</h3>
+              <p>Inventory Office VBA separately from IIS/.NET, then route each automation to Office Scripts, services, retirement or evidence-backed manual rewrite.</p>
+              <a href="https://github.com/enkayz/system8/blob/0a7761cfc6b0fb448221c6edb7eeacbcd708d0e4/docs/examples/government/land-asset-sales-migration.md#5-legacy-estate-and-automation-inventory" target="_blank" rel="noreferrer">Open migration controls ↗</a>
+            </article>
+            <article className="example-card">
+              <span>Public assurance</span><h3>TLS, privacy and DLP</h3>
+              <p>Baseline the public edge, separate publishable and restricted fields, and simulate information-protection policy before enforcement.</p>
+              <a href="https://github.com/enkayz/system8/blob/0a7761cfc6b0fb448221c6edb7eeacbcd708d0e4/docs/examples/government/tls-management.md" target="_blank" rel="noreferrer">Open assurance example ↗</a>
+            </article>
+          </div>
+        </section>
+
         <section className="install" id="install" aria-labelledby="install-title">
-          <div><span className="section-index light">03</span><h2 id="install-title">One command.<br />A governed toolkit.</h2><p>Run in Windows PowerShell 5.1 or PowerShell 7. The bootstrap self-elevates for the machine-wide installation.</p></div>
+          <div><span className="section-index light">04</span><h2 id="install-title">One command.<br />A governed toolkit.</h2><p>Run in Windows PowerShell 5.1 or PowerShell 7. The bootstrap self-elevates for the machine-wide installation.</p></div>
           <div className="terminal-card"><div className="terminal-bar"><span>PowerShell</span><span>machine install</span></div><code>{installer}</code><button onClick={() => copy(installer, "installer")}>{copied === "installer" ? "Copied to clipboard" : "Copy installer"}</button></div>
         </section>
 
         <section className="harness" id="harness" aria-labelledby="harness-title">
-          <div><span className="section-index">04</span><h2 id="harness-title">Run the verified fixture harness</h2></div>
+          <div><span className="section-index">05</span><h2 id="harness-title">Run the verified fixture harness</h2></div>
           <div className="harness-body">
             <p>The repository harness parses every PowerShell file, validates package manifest paths, installs five core packages into an isolated temporary root, runs help and offline fixture reports, compares tenant snapshots, and produces a migration estimate.</p>
             <div className="verification-list" aria-label="Harness checks"><span>SYNTAX_OK</span><span>MANIFEST_PATHS_OK</span><span>CLEAN_INSTALL_OK</span><span>HELP_AND_FIXTURE_REPORTS_OK</span><span>TENANT_DIFF_FIXTURE_OK</span><span>MIGRATION_FIXTURE_OK</span></div>

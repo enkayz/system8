@@ -71,6 +71,17 @@ The previous `dashboard-v1.0.0` binary is withdrawn from supported installation 
 
 Source and current release status: [`tools/s8/dashboard`](tools/s8/dashboard)
 
+### Public land asset sales migration features
+
+The government-generic feature pack focuses on a portable public catalogue rather than one buyer or one platform:
+
+- [Land asset sales migration](docs/examples/government/land-asset-sales-migration.md) — catalogue, GIS, temporal history, portability, legacy automation, security and migration gates.
+- [Machine-readable feature registry](docs/examples/government/land-asset-features.json) — ten outcomes with explicit evidence requirements.
+- [GitHub and library discovery keywords](docs/examples/government/github-discovery-keywords.md) — Australian GIS, open standards, temporal maps, platform migration and security candidates.
+- [TLS management](docs/examples/government/tls-management.md) and [DLP management](docs/examples/government/dlp-management.md) — bounded public-edge and information-protection controls.
+
+The [synthetic source inventory](docs/examples/government/land-asset-source-inventory.csv) contains no production data and can be executed through the offline migration estimator.
+
 ## Current surface
 
 ### `s8` package manager
